@@ -5,7 +5,7 @@ import PageTitle from '@/components/layout/PageTitle.vue'
 
 <template>
   <PageTitle title="New Product"  parentTitle="Products"/>
-  <div class="mt-10">
+  <div class="mt-10 p-5 border border-gray-200 rounded-lg bg-white">
     <FormKit
         type="form"
         submit-label="Add product"

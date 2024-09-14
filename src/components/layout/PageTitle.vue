@@ -13,7 +13,7 @@ defineProps({
 
 <template>
     <h1 class="mb-4 text-xl font-semibold leading-none tracking-tight text-gray-900">{{title}}</h1>
-    <nav class="flex px-5 py-3 text-gray-700 border border-gray-200 rounded-lg bg-gray-50" aria-label="Breadcrumb">
+    <nav class="flex text-gray-700 py-3 " aria-label="Breadcrumb">
       <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
         <li v-if="parentTitle === 'Admin'" class="inline-flex items-center">
           <span class="inline-flex items-center text-sm font-regular text-gray-700">

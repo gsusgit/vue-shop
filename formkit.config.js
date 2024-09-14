@@ -10,17 +10,6 @@ const config = {
                 help: 'text-sm text-gray-500',
                 message: 'text-red-500 text-sm mt-1'
             },
-            file: {
-                input: '$reset w-auto',
-                noFiles: 'block my-2 text-sm',
-                fileItem: 'hidden'
-            },
-            select: {
-                input: '$reset w-full px-4 py-2 pr-20 border border-gray-200 rounded-md shadow-sm focus:ring-2 focus:ring-teal-500 focus:border-teal-500'
-            },
-            number: {
-                input: '$reset w-full px-4 py-2 border border-gray-200 rounded-md shadow-sm focus:ring-2 focus:ring-teal-500 focus:border-teal-500'
-            },
             submit: {
                 input: '$reset px-4 py-2 mt-3 w-auto rounded-md shadow-sm border-teal-600 text-white bg-teal-600 hover:bg-teal-700 focus:bg-teal-700'
             }

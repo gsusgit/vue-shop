@@ -1,10 +1,11 @@
 <script setup>
 
-  import { ref, reactive } from 'vue'
+  import { ref, reactive, onMounted } from 'vue'
   import { useRouter } from 'vue-router'
   import { FormKit } from '@formkit/vue'
   import useImage from '@/composables/useImage.js'
   import { useProductsStore } from '@/stores/products.js'
+  import useToast from '@/composables/useToast.js'
   import { CameraIcon } from '@heroicons/vue/24/outline'
   import PageTitle from '@/components/layout/PageTitle.vue'
 
@@ -15,14 +16,16 @@
     isUploading
   } = useImage()
 
+  const { show } = useToast()
+
   const products = useProductsStore()
   const fileInputRef = ref(null)
   const formData = reactive({
-    name: 'Black and Orange Hoodie',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    category: '2',
-    price: '49',
-    stock: '3',
+    name: '',
+    description: '',
+    category: '',
+    price: '',
+    stock: '',
   })
   const router = useRouter()
 
@@ -38,10 +41,15 @@
             ...data,
             image: imageUrl.value
           })
-          router.push({name: 'products'})
+      triggerToast()
     } catch (error) {
       console.log(error)
     }
+  }
+
+  const triggerToast = () => {
+    show('New product added', 'success')
+    router.push({name: 'products'})
   }
 
 </script>

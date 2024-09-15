@@ -3,7 +3,6 @@ import PageTitle from '@/components/layout/PageTitle.vue'
 import ProductListView from '@/views/admnin/products/ProductListView.vue'
 import { useProductsStore } from '@/stores/products.js'
 import Notification from '@/components/layout/Notification.vue'
-import { ref } from 'vue'
 
 const products = useProductsStore()
 

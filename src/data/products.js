@@ -3,13 +3,13 @@ export const products = [
         "name": "Gray Hoodie",
         "price": 49,
         "stock": 5,
-        "category": 1,
+        "category": 2,
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Orange Men's Hoodie",
-        "price": 29,
-        "stock": 3,
+        "name": "Women's Sneakers",
+        "price": 59,
+        "stock": 10,
         "category": 1,
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
@@ -17,18 +17,11 @@ export const products = [
         "name": "Blue Hoodie",
         "price": 49,
         "stock": 8,
-        "category": 1,
+        "category": 2,
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "White Hoodie",
-        "price": 29,
-        "stock": 10,
-        "category": 1,
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
-    {
-        "name": "Black / Orange Hoodie",
+        "name": "Pink Women's Sneakers",
         "price": 49,
         "stock": 10,
         "category": 1,
@@ -38,12 +31,19 @@ export const products = [
         "name": "Black / Red Hoodie",
         "price": 39,
         "stock": 10,
+        "category": 2,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    {
+        "name": "Casual Shoes",
+        "price": 49,
+        "stock": 10,
         "category": 1,
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Red Hoodie",
-        "price": 49,
+        "name": "Gray Sneakers",
+        "price": 79,
         "stock": 10,
         "category": 1,
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
@@ -52,55 +52,6 @@ export const products = [
         "name": "White / Blue Hoodie",
         "price": 49,
         "stock": 10,
-        "category": 1,
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
-    {
-        "name": "Yellow Women's Hoodie",
-        "price": 39,
-        "stock": 10,
-        "category": 1,
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
-    {
-        "name": "Women's Sneakers",
-        "price": 59,
-        "stock": 10,
-        "category": 2,
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
-    {
-        "name": "Casual Shoes",
-        "price": 49,
-        "stock": 10,
-        "category": 2,
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
-    {
-        "name": "Pink Women's Sneakers",
-        "price": 49,
-        "stock": 10,
-        "category": 2,
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
-    {
-        "name": "Gray Sneakers",
-        "price": 79,
-        "stock": 10,
-        "category": 2,
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
-    {
-        "name": "Red / Black Sneakers",
-        "price": 69,
-        "stock": 10,
-        "category": 2,
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
-    {
-        "name": "Women's Sport Sneakers",
-        "price": 69,
-        "stock": 10,
         "category": 2,
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
@@ -108,19 +59,12 @@ export const products = [
         "name": "Men's Blue Sneakers",
         "price": 69,
         "stock": 10,
-        "category": 2,
+        "category": 1,
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Blue Sneakers",
-        "price": 69,
-        "stock": 10,
-        "category": 2,
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
-    {
-        "name": "Men's Casual Sneakers",
-        "price": 59,
+        "name": "Black / Orange Hoodie",
+        "price": 49,
         "stock": 10,
         "category": 2,
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
@@ -129,105 +73,56 @@ export const products = [
         "name": "Gray Casual Sneakers",
         "price": 49,
         "stock": 10,
+        "category": 1,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    {
+        "name": "Red / Black Sneakers",
+        "price": 69,
+        "stock": 10,
+        "category": 1,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    {
+        "name": "Women's Sport Sneakers",
+        "price": 69,
+        "stock": 10,
+        "category": 1,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    {
+        "name": "Yellow Women's Hoodie",
+        "price": 39,
+        "stock": 10,
         "category": 2,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    {
+        "name": "Men's Casual Sneakers",
+        "price": 59,
+        "stock": 10,
+        "category": 1,
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
         "name": "Light Boot Sneakers",
         "price": 59,
         "stock": 10,
-        "category": 2,
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
-    {
-        "name": "Black Boot Sneakers",
-        "price": 59,
-        "stock": 10,
-        "category": 2,
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
-    {
-        "name": "Black / Blue Boot Sneakers",
-        "price": 59,
-        "stock": 10,
-        "category": 2,
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
-    {
-        "name": "Black Casual Sneakers",
-        "price": 49,
-        "stock": 10,
-        "category": 2,
+        "category": 1,
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
         "name": "Gray / Black Casual Sneakers",
         "price": 49,
         "stock": 10,
-        "category": 2,
+        "category": 1,
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Men's Black Sneakers",
+        "name": "Black / Blue Boot Sneakers",
         "price": 59,
         "stock": 10,
-        "category": 2,
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
-    {
-        "name": "Men's Gray Sneakers",
-        "price": 69,
-        "stock": 10,
-        "category": 2,
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
-    {
-        "name": "Men's Gray Shoes",
-        "price": 69,
-        "stock": 10,
-        "category": 2,
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
-    {
-        "name": "Gray / Red Sneakers",
-        "price": 49,
-        "stock": 10,
-        "category": 2,
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
-    {
-        "name": "Women's Black Sneakers",
-        "price": 59,
-        "stock": 10,
-        "category": 2,
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
-    {
-        "name": "Blue Casual Sneakers",
-        "price": 69,
-        "stock": 10,
-        "category": 2,
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
-    {
-        "name": "Gray Sport Sneakers",
-        "price": 69,
-        "stock": 10,
-        "category": 2,
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
-    {
-        "name": "Green Casual Sneakers",
-        "price": 59,
-        "stock": 10,
-        "category": 2,
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
-    {
-        "name": "Red Casual Sneakers",
-        "price": 59,
-        "stock": 10,
-        "category": 2,
+        "category": 1,
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
@@ -238,6 +133,34 @@ export const products = [
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
+        "name": "Red Casual Sneakers",
+        "price": 59,
+        "stock": 10,
+        "category": 1,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    {
+        "name": "Black Casual Sneakers",
+        "price": 49,
+        "stock": 10,
+        "category": 1,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    {
+        "name": "Men's Gray Sneakers",
+        "price": 69,
+        "stock": 10,
+        "category": 1,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    {
+        "name": "Men's Gray Shoes",
+        "price": 69,
+        "stock": 10,
+        "category": 1,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    {
         "name": "Sunglasses - Black",
         "price": 39,
         "stock": 10,
@@ -245,8 +168,8 @@ export const products = [
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Dark Sunglasses",
-        "price": 29,
+        "name": "Sunglasses - Blue Finish",
+        "price": 39,
         "stock": 10,
         "category": 3,
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
@@ -260,13 +183,6 @@ export const products = [
     },
     {
         "name": "Sunglasses Blue Finish",
-        "price": 39,
-        "stock": 10,
-        "category": 3,
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
-    {
-        "name": "Modern Black Sunglasses",
         "price": 39,
         "stock": 10,
         "category": 3,

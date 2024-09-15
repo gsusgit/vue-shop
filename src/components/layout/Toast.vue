@@ -16,7 +16,7 @@ const {
     <div
         v-if="showToast"
         :class="[color === 'success' ? 'bg-green-200' : 'bg-red-200']"
-        class="toast fixed bottom-9 right-4 w-full max-w-xs p-4 text-gray-500 rounded-lg shadow"
+        class="toast fixed bottom-24 right-4 w-full max-w-xs p-4 text-gray-500 rounded-lg shadow"
         role="alert">
       <button
           type="button"

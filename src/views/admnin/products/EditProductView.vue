@@ -32,7 +32,7 @@ watch(product, (product) => {
     Object.assign((formData), product)
     imageUrl.value = product.image
   } else {
-    router.push({ name: 'not-found' })
+    router.push({name: 'products'})
   }
 })
 

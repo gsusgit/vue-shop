@@ -9,7 +9,14 @@ const products = useProductsStore()
 const notification = {
   title: 'Store is empty',
   message: 'No products have been added to the store yet. Start by clicking the button below to add your first product and manage it easily from here.',
-  button: 'Start adding a new product'
+  button1: {
+    text: 'Start adding a new product',
+    route: ''
+  },
+  button2: {
+    text: 'Import demo content',
+    route: 'import-demo'
+  }
 }
 </script>
 

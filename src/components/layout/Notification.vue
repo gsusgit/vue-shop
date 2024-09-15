@@ -21,9 +21,14 @@ defineProps({
     </div>
     <div class="flex">
       <RouterLink :to="{name: 'new-product'}">
-        <button type="button" class="text-white bg-teal-800 hover:bg-teal-900 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800">
-          {{notification.button}}
+        <button type="button" class="text-white bg-teal-800 hover:bg-teal-900 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center">
+          {{notification.button1.text}}
         </button>
+        <RouterLink :to="{name: notification.button2.route}">
+          <button type="button" class="text-white bg-neutral-800 hover:bg-neutral-900 focus:ring-4 focus:outline-none focus:ring-neutral-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-cente">
+            {{notification.button2.text}}
+          </button>
+        </RouterLink>
       </RouterLink>
     </div>
   </div>

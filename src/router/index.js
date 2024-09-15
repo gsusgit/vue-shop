@@ -38,6 +38,11 @@ const router = createRouter({
           path: '/admin/edit-product/:id',
           name: 'edit-product',
           component: () => import('../views/admnin/products/EditProductView.vue')
+        },
+        {
+          path: '/admin/import-demo',
+          name: 'import-demo',
+          component: () => import('../views/admnin/products/SeederView.vue')
         }
       ]
     }

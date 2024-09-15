@@ -12,6 +12,9 @@ const config = {
             },
             submit: {
                 input: '$reset px-4 py-2 mt-3 w-auto rounded-md shadow-sm border-teal-600 text-white bg-teal-600 hover:bg-teal-700 focus:bg-teal-700'
+            },
+            file: {
+                input: '$reset w-auto',
             }
         })
     }

@@ -1,4 +1,6 @@
 export const formatCurrency = amount => Number(amount).toLocaleString('en-US', {
     style: 'currency',
-    currency: 'USD'
+    currency: 'USD',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
 })

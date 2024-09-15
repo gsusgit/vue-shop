@@ -23,21 +23,26 @@ const cartItems = ref(0) // tempral, hasta que coja el carrito del composable
 
 const products = useProductsStore()
 
+const filterByCategory = (category) => {
+  console.log(category)
+}
 </script>
 
 <template>
   <div
-      v-if="products.productsCollection.length > 0"
+      v-if="products.filteredProducts.length > 0"
       :class="[cartItems.length > 0 ? 'grid-cols-3 gap-4' : 'grid-cols-1 gap-4']"
       class="grid">
     <div class="col-span-2">
       <h1 class="mb-10 text-center text-5xl font-bold text-gray-900">
         <span class="text-teal-600">Fresh Picks</span> for You
       </h1>
-      <Filter />
+      <Filter
+        @filter-by-category="filterByCategory"
+      />
       <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <Product
-            v-for="product in products.productsCollection"
+            v-for="product in products.filteredProducts"
             :product="product"
         />
       </div>

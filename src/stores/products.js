@@ -7,8 +7,8 @@ import { ref as storageRef, deleteObject } from 'firebase/storage'
 export const useProductsStore = defineStore('products', () => {
 
     const categories = [
-        {id: 1, name: 'Shoes'},
-        {id: 2, name: 'Hoodies'},
+        {id: 1, name: 'Hoodies'},
+        {id: 2, name: 'Shoes'},
         {id: 3, name: 'Sunglasses'}
     ]
 
@@ -19,6 +19,8 @@ export const useProductsStore = defineStore('products', () => {
     const products = useCollection(collection(db, 'products'))
 
     const categoryFilter = ref('')
+
+    const selectedCategory = ref(0)
 
     async function createProduct(product) {
         await addDoc(collection(db, 'products'), product)
@@ -46,6 +48,14 @@ export const useProductsStore = defineStore('products', () => {
         }))
     })
 
+    const filteredProducts = computed(() => {
+        if (selectedCategory.value === 0) {
+            return productsCollection.value
+        } else {
+            return productsCollection.value.filter(product => product.category === selectedCategory.value)
+        }
+    })
+
     const categoryOptions = computed(() => {
         return [
             {
@@ -70,8 +80,10 @@ export const useProductsStore = defineStore('products', () => {
         createProduct,
         updateProduct,
         removeProduct,
+        filteredProducts,
         filterCategories,
         categoryOptions,
-        productsCollection
+        productsCollection,
+        selectedCategory
     }
 })

@@ -107,7 +107,8 @@
                 placeholder="Product price"
                 validation="required"
                 :validation-messages="{ required: 'Price is required' }"
-                min="1"
+                min="0.01"
+                step="0.01"
                 v-model.number="formData.price"
             />
 

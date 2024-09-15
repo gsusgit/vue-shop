@@ -1,5 +1,4 @@
 <script setup>
-
 import { ref, reactive, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { FormKit } from '@formkit/vue'
@@ -9,7 +8,7 @@ import useToast from '@/composables/useToast.js'
 import { CameraIcon } from '@heroicons/vue/24/outline'
 import PageTitle from '@/components/layout/PageTitle.vue'
 import { useFirestore, useDocument } from 'vuefire'
-import { addDoc, doc } from 'firebase/firestore'
+import { doc } from 'firebase/firestore'
 
 const {
   onFileChange,
@@ -29,10 +28,10 @@ const product = useDocument(docRef)
 
 watch(product, (product) => {
   if (product) {
-    Object.assign((formData), product)
+    Object.assign(formData, product)
     imageUrl.value = product.image
   } else {
-    router.push({name: 'products'})
+    router.push({ name: 'products' })
   }
 })
 
@@ -46,6 +45,13 @@ const formData = reactive({
   stock: '',
 })
 const router = useRouter()
+
+// Watch for changes in the price field to ensure it always has two decimal places
+watch(() => formData.price, (newValue) => {
+  if (newValue !== '') {
+    formData.price = parseFloat(newValue).toFixed(2)
+  }
+})
 
 const handleImageClick = () => {
   if (fileInputRef.value) {
@@ -66,20 +72,24 @@ const triggerToast = () => {
   show('Product updated', 'success')
   router.push({name: 'products'})
 }
-
 </script>
 
 <template>
-  <PageTitle title="Edit Product" parentTitle="Products"/>
-  <div class="mt-10 p-5 border border-gray-200 rounded-lg bg-white">
+  <PageTitle
+      title="Edit Product"
+      parentTitle="Products"/>
+  <div
+      class="mt-10 p-5 border border-gray-200 rounded-lg bg-white">
     <FormKit
         type="form"
         submit-label="Update Product"
         @submit="submitHandler"
         :value="formData"
     >
-      <div class="grid grid-cols-3 gap-4">
-        <div class="col-span-2">
+      <div
+          class="grid grid-cols-3 gap-4">
+        <div
+            class="col-span-2">
           <FormKit
               type="text"
               label="Name"
@@ -88,7 +98,6 @@ const triggerToast = () => {
               validation="required"
               :validation-messages="{ required: 'Name is required' }"
               v-model.trim="formData.name"
-              v-model='name'
           />
 
           <FormKit
@@ -100,10 +109,10 @@ const triggerToast = () => {
               :validation-messages="{ required: 'Description is required' }"
               rows="12"
               v-model.trim="formData.description"
-              v-model='description'
           />
 
-          <div class="grid grid-cols-3 gap-4 mt-4">
+          <div
+              class="grid grid-cols-3 gap-4 mt-4">
             <FormKit
                 type="select"
                 label="Category"
@@ -113,7 +122,6 @@ const triggerToast = () => {
                 :validation-messages="{ required: 'Category is required' }"
                 :options="products.categoryOptions"
                 v-model.trim="formData.category"
-                v-model='category'
             />
 
             <FormKit
@@ -123,9 +131,9 @@ const triggerToast = () => {
                 placeholder="Product price"
                 validation="required"
                 :validation-messages="{ required: 'Price is required' }"
-                min="1"
+                min="0.01"
+                step="0.01"
                 v-model.number="formData.price"
-                v-model='price'
             />
 
             <FormKit
@@ -137,31 +145,49 @@ const triggerToast = () => {
                 :validation-messages="{ required: 'Stock is required' }"
                 min="0"
                 v-model.number="formData.stock"
-                v-model='stock'
             />
           </div>
         </div>
 
-        <div class="col-span-1">
-          <label class="formkit-label block font-bold text-gray-700 mb-2 text-sm">Image</label>
-          <div v-if="isUploading && !imageUploaded" class="relative w-full aspect-w-1 aspect-h-1 rounded-xl shadow-sm border border-gray-200" style="height: 390px;" role="group" aria-label="Uploading">
-            <div class="absolute inset-0 flex items-center justify-center rounded-2xl">
-              <div class="flex flex-col items-center justify-center">
-                <div class="border-gray-300 h-12 w-12 animate-spin rounded-full border-4 border-t-teal-600"></div>
-                <span class="mt-2 text-gray-500">Loading image...</span>
+        <div
+            class="col-span-1">
+          <label
+              class="formkit-label block font-bold text-gray-700 mb-2 text-sm">Image</label>
+          <div
+              v-if="isUploading && !imageUploaded"
+              class="relative w-full aspect-w-1 aspect-h-1 rounded-xl shadow-sm border border-gray-200"
+              style="height: 390px;"
+              role="group"
+              aria-label="Uploading">
+            <div
+                class="absolute inset-0 flex items-center justify-center rounded-2xl">
+              <div
+                  class="flex flex-col items-center justify-center">
+                <div
+                    class="border-gray-300 h-12 w-12 animate-spin rounded-full border-4 border-t-teal-600"></div>
+                <span
+                    class="mt-2 text-gray-500">Loading image...</span>
               </div>
             </div>
           </div>
 
-          <div v-if="!isUploading" class="relative w-full aspect-w-1 aspect-h-1 rounded-xl shadow-sm border border-gray-200 bg-gray-50" style="height: 395px">
-            <img v-if="imageUploaded"
-                 :src="imageUrl"
-                 alt="Product Image"
-                 class="cursor-pointer object-cover w-full h-full rounded-2xl"
-                 @click="handleImageClick"
+          <div
+              v-if="!isUploading"
+              class="relative w-full aspect-w-1 aspect-h-1 rounded-xl shadow-sm border border-gray-200 bg-gray-50"
+              style="height: 395px">
+            <img
+                v-if="imageUploaded"
+                :src="imageUrl"
+                alt="Product Image"
+                class="cursor-pointer object-cover w-full h-full rounded-2xl"
+                @click="handleImageClick"
             />
-            <div v-if="!imageUploaded && !isUploading" class="flex items-center justify-center w-full h-full">
-              <CameraIcon class="w-12 h-12 text-gray-500 cursor-pointer" @click="handleImageClick"/>
+            <div
+                v-if="!imageUploaded && !isUploading"
+                class="flex items-center justify-center w-full h-full">
+              <CameraIcon
+                  class="w-12 h-12 text-gray-500 cursor-pointer"
+                  @click="handleImageClick"/>
             </div>
             <input
                 type="file"

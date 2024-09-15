@@ -9,3 +9,7 @@
         @apply font-inter;
     }
 }
+
+.toast {
+    z-index: 99 !important;
+}

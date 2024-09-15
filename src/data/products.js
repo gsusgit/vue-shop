@@ -1,242 +1,282 @@
 export const products = [
     {
-        "name": "Sudadera Gris",
+        "name": "Gray Hoodie",
         "price": 49,
         "stock": 5,
-        "category": 1
+        "category": 1,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Sudadera Naranja Hombre",
+        "name": "Orange Men's Hoodie",
         "price": 29,
         "stock": 3,
-        "category": 1
+        "category": 1,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Sudadera Azul",
+        "name": "Blue Hoodie",
         "price": 49,
         "stock": 8,
-        "category": 1
+        "category": 1,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Sudadera Blanca",
+        "name": "White Hoodie",
         "price": 29,
         "stock": 10,
-        "category": 1
+        "category": 1,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Sudadera Negra / Naranja",
+        "name": "Black / Orange Hoodie",
         "price": 49,
         "stock": 10,
-        "category": 1
+        "category": 1,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Sudadera Negra / Rojo",
+        "name": "Black / Red Hoodie",
         "price": 39,
         "stock": 10,
-        "category": 1
+        "category": 1,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Sudadera Rojo",
+        "name": "Red Hoodie",
         "price": 49,
         "stock": 10,
-        "category": 1
+        "category": 1,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Sudadera Blanco / Azul",
+        "name": "White / Blue Hoodie",
         "price": 49,
         "stock": 10,
-        "category": 1
+        "category": 1,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Sudadera Amarillo Mujer",
+        "name": "Yellow Women's Hoodie",
         "price": 39,
         "stock": 10,
-        "category": 1
+        "category": 1,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Tenis Mujer",
+        "name": "Women's Sneakers",
         "price": 59,
         "stock": 10,
-        "category": 2
+        "category": 2,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Zapato Casual",
+        "name": "Casual Shoes",
         "price": 49,
         "stock": 10,
-        "category": 2
+        "category": 2,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Tenis Mujer Rosa",
+        "name": "Pink Women's Sneakers",
         "price": 49,
         "stock": 10,
-        "category": 2
+        "category": 2,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Tenis Gris",
+        "name": "Gray Sneakers",
         "price": 79,
         "stock": 10,
-        "category": 2
+        "category": 2,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Tenis Rojo / Negro",
+        "name": "Red / Black Sneakers",
         "price": 69,
         "stock": 10,
-        "category": 2
+        "category": 2,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Tenis Mujer Deporte",
+        "name": "Women's Sport Sneakers",
         "price": 69,
         "stock": 10,
-        "category": 2
+        "category": 2,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Tenis Azul Hombre",
+        "name": "Men's Blue Sneakers",
         "price": 69,
         "stock": 10,
-        "category": 2
+        "category": 2,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Tenis Azul",
+        "name": "Blue Sneakers",
         "price": 69,
         "stock": 10,
-        "category": 2
+        "category": 2,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Tenis Casual Hombre",
+        "name": "Men's Casual Sneakers",
         "price": 59,
         "stock": 10,
-        "category": 2
+        "category": 2,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Tenis Casual Gris",
+        "name": "Gray Casual Sneakers",
         "price": 49,
         "stock": 10,
-        "category": 2
+        "category": 2,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Tenis Bota Claros",
+        "name": "Light Boot Sneakers",
         "price": 59,
         "stock": 10,
-        "category": 2
+        "category": 2,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Tenis Bota Negro",
+        "name": "Black Boot Sneakers",
         "price": 59,
         "stock": 10,
-        "category": 2
+        "category": 2,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Tenis Bota Negro / Azul",
+        "name": "Black / Blue Boot Sneakers",
         "price": 59,
         "stock": 10,
-        "category": 2
+        "category": 2,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Tenis Casual Negro",
+        "name": "Black Casual Sneakers",
         "price": 49,
         "stock": 10,
-        "category": 2
+        "category": 2,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Tenis Casual Gris / Negro",
+        "name": "Gray / Black Casual Sneakers",
         "price": 49,
         "stock": 10,
-        "category": 2
+        "category": 2,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Tenis Hombre Negro",
+        "name": "Men's Black Sneakers",
         "price": 59,
         "stock": 10,
-        "category": 2
+        "category": 2,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Tenis Hombre Gris",
+        "name": "Men's Gray Sneakers",
         "price": 69,
         "stock": 10,
-        "category": 2
+        "category": 2,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Zapato Gris Hombre",
+        "name": "Men's Gray Shoes",
         "price": 69,
         "stock": 10,
-        "category": 2
+        "category": 2,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Tenis Gris / Rojo",
+        "name": "Gray / Red Sneakers",
         "price": 49,
         "stock": 10,
-        "category": 2
+        "category": 2,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Tenis Negro Mujer",
+        "name": "Women's Black Sneakers",
         "price": 59,
         "stock": 10,
-        "category": 2
+        "category": 2,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Tenis Azul Casual",
+        "name": "Blue Casual Sneakers",
         "price": 69,
         "stock": 10,
-        "category": 2
+        "category": 2,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Tenis Deporte Gris",
+        "name": "Gray Sport Sneakers",
         "price": 69,
         "stock": 10,
-        "category": 2
+        "category": 2,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Tenis Verde Casual",
+        "name": "Green Casual Sneakers",
         "price": 59,
         "stock": 10,
-        "category": 2
+        "category": 2,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Tenis Rojo Casual",
+        "name": "Red Casual Sneakers",
         "price": 59,
         "stock": 10,
-        "category": 2
+        "category": 2,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Lentes Sol - Gris",
+        "name": "Sunglasses - Gray",
         "price": 39,
         "stock": 10,
-        "category": 3
+        "category": 3,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Lentes Sol - Negro",
+        "name": "Sunglasses - Black",
         "price": 39,
         "stock": 10,
-        "category": 3
+        "category": 3,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Lentes Oscuros",
+        "name": "Dark Sunglasses",
         "price": 29,
         "stock": 10,
-        "category": 3
+        "category": 3,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Lentes para Sol",
+        "name": "Sunglasses",
         "price": 49,
         "stock": 10,
-        "category": 3
+        "category": 3,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Lentes Sol acabado azul",
+        "name": "Sunglasses Blue Finish",
         "price": 39,
         "stock": 10,
-        "category": 3
+        "category": 3,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Lentes Modernos Negros",
+        "name": "Modern Black Sunglasses",
         "price": 39,
         "stock": 10,
-        "category": 3
+        "category": 3,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        "name": "Lentes Clasicos",
+        "name": "Classic Sunglasses",
         "price": 39,
         "stock": 10,
-        "category": 3
+        "category": 3,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     }
 ]

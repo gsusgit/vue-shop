@@ -1,67 +1,80 @@
 <script setup>
 
-  import { ref, reactive } from 'vue'
-  import { useRouter } from 'vue-router'
-  import { FormKit } from '@formkit/vue'
-  import useImage from '@/composables/useImage.js'
-  import { useProductsStore } from '@/stores/products.js'
-  import useToast from '@/composables/useToast.js'
-  import { CameraIcon } from '@heroicons/vue/24/outline'
-  import PageTitle from '@/components/layout/PageTitle.vue'
-  import { uid } from 'uid'
+import { ref, reactive, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { FormKit } from '@formkit/vue'
+import useImage from '@/composables/useImage.js'
+import { useProductsStore } from '@/stores/products.js'
+import useToast from '@/composables/useToast.js'
+import { CameraIcon } from '@heroicons/vue/24/outline'
+import PageTitle from '@/components/layout/PageTitle.vue'
+import { useFirestore, useDocument } from 'vuefire'
+import { addDoc, doc } from 'firebase/firestore'
 
-  const {
-    onFileChange,
-    imageUrl,
-    imageUploaded,
-    isUploading
-  } = useImage()
+const {
+  onFileChange,
+  imageUrl,
+  imageUploaded,
+  isUploading
+} = useImage()
 
-  const { show } = useToast()
+const store = useProductsStore()
 
-  const products = useProductsStore()
-  const fileInputRef = ref(null)
-  const formData = reactive({
-    name: '',
-    description: '',
-    category: '',
-    price: '',
-    stock: '',
-  })
-  const router = useRouter()
+const { show } = useToast()
 
-  const handleImageClick = () => {
-    if (fileInputRef.value) {
-      fileInputRef.value.click()
-    }
+const route = useRoute()
+const db = useFirestore()
+const docRef = doc(db, 'products', route.params.id)
+const product = useDocument(docRef)
+
+watch(product, (product) => {
+  if (product) {
+    Object.assign((formData), product)
+    imageUrl.value = product.image
+  } else {
+    router.push({ name: 'not-found' })
   }
+})
 
-  const submitHandler = async data => {
-    try {
-      await products.createProduct({
-            ...data,
-            image: imageUrl.value,
-            id: uid(),
-          })
-      triggerToast()
-    } catch (error) {
-      console.log(error)
-    }
-  }
+const products = useProductsStore()
+const fileInputRef = ref(null)
+const formData = reactive({
+  name: '',
+  description: '',
+  category: '',
+  price: '',
+  stock: '',
+})
+const router = useRouter()
 
-  const triggerToast = () => {
-    show('New product added', 'success')
-    router.push({name: 'products'})
+const handleImageClick = () => {
+  if (fileInputRef.value) {
+    fileInputRef.value.click()
   }
+}
+
+const submitHandler = async data => {
+  const product = {
+    ...data,
+    image: imageUrl.value
+  }
+  await store.updateProduct(docRef, product)
+  triggerToast()
+}
+
+const triggerToast = () => {
+  show('Product updated', 'success')
+  router.push({name: 'products'})
+}
 
 </script>
 
 <template>
-  <PageTitle title="New Product" parentTitle="Products"/>
+  <PageTitle title="Edit Product" parentTitle="Products"/>
   <div class="mt-10 p-5 border border-gray-200 rounded-lg bg-white">
     <FormKit
         type="form"
-        submit-label="Add Product"
+        submit-label="Update Product"
         @submit="submitHandler"
         :value="formData"
     >
@@ -75,6 +88,7 @@
               validation="required"
               :validation-messages="{ required: 'Name is required' }"
               v-model.trim="formData.name"
+              v-model='name'
           />
 
           <FormKit
@@ -86,6 +100,7 @@
               :validation-messages="{ required: 'Description is required' }"
               rows="12"
               v-model.trim="formData.description"
+              v-model='description'
           />
 
           <div class="grid grid-cols-3 gap-4 mt-4">
@@ -98,6 +113,7 @@
                 :validation-messages="{ required: 'Category is required' }"
                 :options="products.categoryOptions"
                 v-model.trim="formData.category"
+                v-model='category'
             />
 
             <FormKit
@@ -109,6 +125,7 @@
                 :validation-messages="{ required: 'Price is required' }"
                 min="1"
                 v-model.number="formData.price"
+                v-model='price'
             />
 
             <FormKit
@@ -120,6 +137,7 @@
                 :validation-messages="{ required: 'Stock is required' }"
                 min="0"
                 v-model.number="formData.stock"
+                v-model='stock'
             />
           </div>
         </div>

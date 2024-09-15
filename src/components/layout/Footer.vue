@@ -5,9 +5,9 @@ const openGithub = () => {
 </script>
 
 <template>
-  <footer class="w-full bg-white py-4 mt-auto">
-    <div class="max-w-screen-xl mx-auto p-4 md:flex md:items-center md:justify-between">
-      <span class="text-sm sm:text-center">Vue + Pinia + Firebase + Tailwind + Formkit
+  <footer class="w-full bg-neutral-900 py-4 mt-auto">
+    <div class="max-w-screen-xl mx-auto px-4 md:flex md:items-center md:justify-between">
+      <span class="text-sm text-white sm:text-center">Vue + Pinia + Firebase + Tailwind + Formkit
     </span>
       <button type="button" class="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 mb-2"
               @click="openGithub">

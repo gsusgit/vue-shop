@@ -1,10 +1,9 @@
 import { defineStore } from 'pinia'
-import { computed, ref, watch, watchEffect } from 'vue'
+import { computed, ref, watch, watchEffect, onMounted } from 'vue'
 import useToast from '@/composables/useToast.js'
 import { useCouponStore } from '@/stores/voucher.js'
 
 export const useCart = defineStore('cart', () => {
-
     const items = ref([])
     const subtotal = ref(0)
     const taxes = ref(0)
@@ -20,10 +19,21 @@ export const useCart = defineStore('cart', () => {
         total.value = Number(((subtotal.value + taxes.value) - coupon.discount).toFixed(2))
     })
 
+    watch(items, (newItems) => {
+        localStorage.setItem('cartItems', JSON.stringify(newItems))
+    }, { deep: true }) // deep para observar cambios en objetos dentro del array
+
+    onMounted(() => {
+        const savedItems = localStorage.getItem('cartItems')
+        if (savedItems) {
+            items.value = JSON.parse(savedItems)
+        }
+    })
+
     function addItem(item) {
         const index = isItemInCart(item.id)
         if(index >= 0) {
-            if(isProductAvailable( item, index )) {
+            if(isProductAvailable(item, index)) {
                 show('Maximum items reached', 'error')
                 return
             }
@@ -49,7 +59,7 @@ export const useCart = defineStore('cart', () => {
         return (product) => product.stock < MAX_PRODUCTS ? product.stock : MAX_PRODUCTS
     })
 
-    const isProductAvailable = ( item, index ) => {
+    const isProductAvailable = (item, index) => {
         return items.value[index].quantity >= item.stock || items.value[index].quantity >= MAX_PRODUCTS
     }
 

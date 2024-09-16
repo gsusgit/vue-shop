@@ -2,6 +2,7 @@
 import { formatCurrency } from '@/lib/helpers.js'
 import { ref } from 'vue'
 import Dialog from '@/components/layout/Dialog.vue'
+import { useCart } from '@/stores/cart.js'
 
 const props = defineProps({
   product: {
@@ -19,6 +20,8 @@ const openDialog = () => {
   dialog.value.show = true
   dialog.value.image = props.product.image
 }
+
+const cart = useCart()
 </script>
 
 <template>
@@ -51,21 +54,21 @@ const openDialog = () => {
         class="px-5 pb-5 flex flex-col flex-grow">
       <a href="#"
          class="flex-grow">
-        <h5 class="text-sm font-semibold tracking-tight text-gray-900">
-          {{
-            product.name
-          }}</h5>
+        <h5 class="text-sm font-semibold tracking-tight text-gray-900">{{product.name }}</h5>
       </a>
       <div
           class="flex items-center justify-between mt-4">
-        <span
-            class="text-sm font-bold text-gray-900">{{
-            formatCurrency(product.price)
-          }}</span>
-        <a href="#"
-           class="bg-neutral-200 text-neutral-800 hover:bg-teal-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-xs px-2 py-1 text-center">Add
-          to
-          cart</a>
+        <span class="text-sm font-bold text-gray-900">{{formatCurrency(product.price)}}</span>
+        <a
+            href="#"
+            class="bg-neutral-200 text-neutral-800 hover:bg-teal-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-xs px-2 py-1 text-center"
+            @click="cart.addItem(product)"
+        >
+          Add to cart
+        </a>
+      </div>
+      <div class="mt-2">
+        <p class="text-sm text-teal-700 font-medium">{{cart.checkProductAvailability(product)}} in stock</p>
       </div>
     </div>
     <Dialog

@@ -11,6 +11,16 @@ const router = createRouter({
       component: ShopView
     },
     {
+      path: '/cart',
+      name: 'cart',
+      component: () => import('../views/CartView.vue'),
+    },
+    {
+      path: '/favourites',
+      name: 'favourites',
+      component: () => import('../views/FavouritesView.vue'),
+    },
+    {
       path: '/:pathMatch(.*)*',
       redirect: '/',
     },

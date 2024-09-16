@@ -40,7 +40,7 @@ const filterByCategory = (category) => {
       <Filter
         @filter-by-category="filterByCategory"
       />
-      <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
         <Product
             v-for="product in products.filteredProducts"
             :product="product"

@@ -7,7 +7,7 @@ export const products = [
         "description": "Off-White x Air Jordan 1 Retro High OG, a 2017 release, features a deconstructed Chicago colorway, off-centered Swoosh, and \"Air\" on the midsole. Its limited availability made it highly coveted.",
     },
     {
-        "name": "Supreme x Louis Vuitton Box Logo Hooded Sweatshirt",
+        "name": "Supreme x Louis Vuitton Hoodie",
         "price": 1568,
         "stock": 3,
         "category": 2,

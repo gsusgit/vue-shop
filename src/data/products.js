@@ -1,282 +1,86 @@
 export const products = [
     {
-        "name": "Gray Hoodie",
-        "price": 49,
+        "name": "Air Jordan 1 Retro High OG Chicago Off White",
+        "price": 4119,
         "stock": 5,
         "category": 1,
-        "description": "Comfortable gray hoodie perfect for any occasion with a simple and stylish design."
+        "description": "Off-White x Air Jordan 1 Retro High OG, a 2017 release, features a deconstructed Chicago colorway, off-centered Swoosh, and \"Air\" on the midsole. Its limited availability made it highly coveted.",
     },
     {
-        "name": "Orange Hoodie for Men",
-        "price": 29,
+        "name": "Supreme x Louis Vuitton Box Logo Hooded Sweatshirt",
+        "price": 1568,
         "stock": 3,
-        "category": 1,
-        "description": "Vibrant orange hoodie for men, ideal for standing out with style and comfort."
+        "category": 2,
+        "description": "Supreme x Louis Vuitton Box Logo Hooded Sweatshirt blends streetwear and luxury with the iconic box logo on premium fabric, featuring LV's signature monogram. A rare and highly sought-after collaboration piece.",
     },
     {
-        "name": "Blue Hoodie",
-        "price": 49,
+        "name": "Fear of God Essentials Sweatpants",
+        "price": 214,
         "stock": 8,
-        "category": 1,
-        "description": "Classic blue hoodie with a timeless design, versatile and comfortable for everyday wear."
-    },
-    {
-        "name": "White Hoodie",
-        "price": 29,
-        "stock": 10,
-        "category": 1,
-        "description": "Fresh and modern white hoodie, easy to pair and perfect for a relaxed look."
-    },
-    {
-        "name": "Black / Orange Hoodie",
-        "price": 49,
-        "stock": 10,
-        "category": 1,
-        "description": "Hoodie with a black and orange combination, offering a bold and modern style."
-    },
-    {
-        "name": "Black / Red Hoodie",
-        "price": 39,
-        "stock": 10,
-        "category": 1,
-        "description": "Black hoodie with red details, adding a pop of color and contemporary style."
-    },
-    {
-        "name": "Red Hoodie",
-        "price": 49,
-        "stock": 10,
-        "category": 1,
-        "description": "Vibrant red hoodie designed for those who want to stand out with a splash of color."
-    },
-    {
-        "name": "White / Blue Hoodie",
-        "price": 49,
-        "stock": 10,
-        "category": 1,
-        "description": "White hoodie with blue accents, perfect for a fresh and modern look."
-    },
-    {
-        "name": "Yellow Hoodie for Women",
-        "price": 39,
-        "stock": 10,
-        "category": 1,
-        "description": "Yellow hoodie for women, ideal for adding a touch of color and energy to your outfit."
-    },
-    {
-        "name": "Women's Sneakers",
-        "price": 59,
-        "stock": 10,
         "category": 2,
-        "description": "Women's sneakers with a modern and comfortable design, perfect for daily wear."
+        "description": "Comfortable and stylish sweatpants from Fear of God Essentials, perfect for a casual yet refined look.",
     },
     {
-        "name": "Casual Shoes",
-        "price": 49,
-        "stock": 10,
-        "category": 2,
-        "description": "Comfortable and elegant casual shoes, ideal for informal occasions and daily use."
-    },
-    {
-        "name": "Pink Women's Sneakers",
-        "price": 49,
-        "stock": 10,
-        "category": 2,
-        "description": "Pink sneakers for women with a feminine and stylish design, suitable for any occasion."
-    },
-    {
-        "name": "Gray Sneakers",
-        "price": 79,
-        "stock": 10,
-        "category": 2,
-        "description": "Gray sneakers with a versatile and modern design, ideal for pairing with any outfit."
-    },
-    {
-        "name": "Red / Black Sneakers",
-        "price": 69,
-        "stock": 10,
-        "category": 2,
-        "description": "Sneakers in red and black, offering a striking and sporty style."
-    },
-    {
-        "name": "Sporty Women's Sneakers",
-        "price": 69,
-        "stock": 10,
-        "category": 2,
-        "description": "Sporty sneakers for women designed for comfort and support during physical activities."
-    },
-    {
-        "name": "Blue Men's Sneakers",
-        "price": 69,
-        "stock": 10,
-        "category": 2,
-        "description": "Blue sneakers for men combining style and comfort for daily wear."
-    },
-    {
-        "name": "Blue Sneakers",
-        "price": 69,
-        "stock": 10,
-        "category": 2,
-        "description": "Blue sneakers with a classic and versatile design, suitable for any casual occasion."
-    },
-    {
-        "name": "Casual Men's Sneakers",
-        "price": 59,
-        "stock": 10,
-        "category": 2,
-        "description": "Casual sneakers for men with a simple and comfortable design, ideal for daily use."
-    },
-    {
-        "name": "Gray Casual Sneakers",
-        "price": 49,
-        "stock": 10,
-        "category": 2,
-        "description": "Gray casual sneakers with a discreet and elegant style, perfect for any occasion."
-    },
-    {
-        "name": "Light Boots Sneakers",
-        "price": 59,
-        "stock": 10,
-        "category": 2,
-        "description": "Light boots sneakers offering extra support, ideal for a casual and comfortable look."
-    },
-    {
-        "name": "Black Boots Sneakers",
-        "price": 59,
-        "stock": 10,
-        "category": 2,
-        "description": "Black boots sneakers with a robust and versatile design, suitable for various activities."
-    },
-    {
-        "name": "Black / Blue Boots Sneakers",
-        "price": 59,
-        "stock": 10,
-        "category": 2,
-        "description": "Boots sneakers in black and blue, providing a modern and attractive style."
-    },
-    {
-        "name": "Black Casual Sneakers",
-        "price": 49,
-        "stock": 10,
-        "category": 2,
-        "description": "Black casual sneakers with a minimalist design, ideal for a simple and elegant look."
-    },
-    {
-        "name": "Gray / Black Casual Sneakers",
-        "price": 49,
-        "stock": 10,
-        "category": 2,
-        "description": "Casual sneakers in gray and black, combining style and comfort for daily wear."
-    },
-    {
-        "name": "Black Men's Sneakers",
-        "price": 59,
-        "stock": 10,
-        "category": 2,
-        "description": "Black sneakers for men with a modern and functional design, perfect for any occasion."
-    },
-    {
-        "name": "Gray Men's Sneakers",
-        "price": 69,
-        "stock": 10,
-        "category": 2,
-        "description": "Gray sneakers for men with a sophisticated and comfortable style, ideal for daily wear."
-    },
-    {
-        "name": "Gray Men's Dress Shoes",
-        "price": 69,
-        "stock": 10,
-        "category": 2,
-        "description": "Gray dress shoes for men, elegant and versatile for formal and casual occasions."
-    },
-    {
-        "name": "Gray / Red Sneakers",
-        "price": 49,
-        "stock": 10,
-        "category": 2,
-        "description": "Sneakers in gray and red, offering an attractive and sporty design for daily wear."
-    },
-    {
-        "name": "Black Women's Sneakers",
-        "price": 59,
-        "stock": 10,
-        "category": 2,
-        "description": "Black sneakers for women with a stylish and comfortable design, suitable for any occasion."
-    },
-    {
-        "name": "Casual Blue Sneakers",
-        "price": 69,
-        "stock": 10,
-        "category": 2,
-        "description": "Casual blue sneakers, combining modern style and comfort for daily wear."
-    },
-    {
-        "name": "Gray Sports Sneakers",
-        "price": 69,
-        "stock": 10,
-        "category": 2,
-        "description": "Gray sports sneakers with extra support, ideal for workouts and physical activities."
-    },
-    {
-        "name": "Green Casual Sneakers",
-        "price": 59,
-        "stock": 10,
-        "category": 2,
-        "description": "Green casual sneakers with a fresh and modern design, perfect for daily use."
-    },
-    {
-        "name": "Red Casual Sneakers",
-        "price": 59,
-        "stock": 10,
-        "category": 2,
-        "description": "Red casual sneakers, ideal for adding a pop of color and style to your outfit."
-    },
-    {
-        "name": "Gray Sunglasses",
-        "price": 39,
+        "name": "Off-White Industrial Belt",
+        "price": 119,
         "stock": 10,
         "category": 3,
-        "description": "Gray sunglasses combining UV protection with a stylish and modern design."
+        "description": "Statement Off-White industrial belt with signature yellow branding, a must-have accessory for streetwear enthusiasts.",
     },
     {
-        "name": "Black Sunglasses",
-        "price": 39,
-        "stock": 10,
+        "name": "Louis Vuitton Wallet",
+        "price": 452,
+        "stock": 1,
         "category": 3,
-        "description": "Black sunglasses with a sophisticated design and UV protection, perfect for any occasion."
+        "description": "The Louis Vuitton Wallet is a timeless accessory crafted from premium materials, featuring the iconic LV monogram. Known for its elegance and durability, it’s a symbol of luxury and style.",
     },
     {
-        "name": "Dark Sunglasses",
-        "price": 29,
+        "name": "Nike Dunk Low Panda",
+        "price": 110,
         "stock": 10,
-        "category": 3,
-        "description": "Dark sunglasses providing essential UV protection with a classic and versatile design."
+        "category": 1,
+        "description": "The Nike Dunk Low Panda features a classic black and white colorway, offering a clean and versatile look. With its smooth leather upper and iconic Dunk silhouette, it’s a must-have for sneaker enthusiasts.",
     },
     {
-        "name": "Sunglasses",
-        "price": 49,
-        "stock": 10,
-        "category": 3,
-        "description": "Stylish sunglasses offering UV protection and a modern design for a variety of looks."
+        "name": "Yeezy Boost 350 V2 Zebra",
+        "price": 315,
+        "stock": 7,
+        "category": 1,
+        "description": "Kanye West’s iconic Yeezy Boost 350 V2 with Primeknit upper and Boost cushioning for superior comfort.",
     },
     {
-        "name": "Blue Finish Sunglasses",
-        "price": 39,
-        "stock": 10,
-        "category": 3,
-        "description": "Sunglasses with a blue finish, offering a unique style and effective UV protection."
+        "name": "Travis Scott x Nike Air Force 1",
+        "price": 1216,
+        "stock": 4,
+        "category": 1,
+        "description": "Unique collaboration between Travis Scott and Nike, featuring custom designs and details on the classic Air Force 1 silhouette.",
     },
     {
-        "name": "Modern Black Sunglasses",
-        "price": 39,
-        "stock": 10,
-        "category": 3,
-        "description": "Modern black sunglasses with a sleek design and UV protection, perfect for contemporary style."
+        "name": "BAPE 1st Camo Shark Full Zip Hoodie",
+        "price": 487,
+        "stock": 5,
+        "category": 2,
+        "description": "The BAPE 1st Camo Shark Full Zip Hoodie features BAPE's iconic camo pattern and the signature shark face design. With a full zip closure extending to the hood, it's a standout piece in streetwear known for its bold and distinctive style.",
     },
     {
-        "name": "Classic Sunglasses",
-        "price": 39,
+        "name": "Fear of God Essentials Pullover Hoodie",
+        "price": 257,
         "stock": 10,
+        "category": 2,
+        "description": "The Fear of God Essentials Pullover Hoodie offers a minimalist design with a focus on comfort and quality. Featuring a relaxed fit and subtle branding, it's a versatile staple in modern streetwear.",
+    },
+    {
+        "name": "Palace x Porter Tri Ferg Hoodie",
+        "price": 324,
+        "stock": 6,
+        "category": 2,
+        "description": "Popular Palace Skateboards hoodie featuring the signature Tri-Ferg logo, blending skate culture with streetwear.",
+    },
+    {
+        "name": "Louis Vuitton Keepall Bandouliere",
+        "price": 4736,
+        "stock": 2,
         "category": 3,
-        "description": "Classic sunglasses with a timeless design and essential UV protection for everyday use."
+        "description": "Luxury Louis Vuitton travel bag with iconic monogram design, perfect for fashion-forward travel.",
     }
 ]

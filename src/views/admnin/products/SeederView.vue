@@ -16,7 +16,7 @@ async function seedDB() {
   const productsCollection = collection(db, "products");
 
   for (let i = 0; i < products.length; i++) {
-    const imageName = `producto${i + 1}.jpg`;
+    const imageName = `product${i + 1}.jpg`;
     const storageRef = ref(storage, `products/${imageName}`);
     const uploadTask = uploadBytesResumable(storageRef, await fetchImage(imageName));
 

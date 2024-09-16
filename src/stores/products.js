@@ -7,9 +7,9 @@ import { ref as storageRef, deleteObject } from 'firebase/storage'
 export const useProductsStore = defineStore('products', () => {
 
     const categories = [
-        {id: 1, name: 'Hoodies'},
-        {id: 2, name: 'Shoes'},
-        {id: 3, name: 'Sunglasses'}
+        {id: 1, name: 'Sneakers'},
+        {id: 2, name: 'Clothing'},
+        {id: 3, name: 'Appareal'}
     ]
 
     const db = useFirestore()

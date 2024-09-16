@@ -15,7 +15,7 @@ const {
       name="fade">
     <div
         v-if="showToast"
-        :class="[color === 'success' ? 'bg-gray-50' : 'bg-red-50']"
+        :class="[color === 'success' ? 'bg-teal-100' : 'bg-red-50']"
         class="toast fixed top-24 right-4 w-full max-w-xs p-4 text-gray-500 rounded-lg shadow"
         role="alert">
       <button

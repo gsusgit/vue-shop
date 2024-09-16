@@ -1,16 +1,24 @@
 import { defineStore } from 'pinia'
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, watchEffect } from 'vue'
 import useToast from '@/composables/useToast.js'
+import { useCouponStore } from '@/stores/voucher.js'
 
 export const useCart = defineStore('cart', () => {
 
     const items = ref([])
-    const subTotal = ref(0)
+    const subtotal = ref(0)
     const taxes = ref(0)
     const total = ref(0)
     const MAX_PRODUCTS = 5
     const TAX_RATE = .10
+    const coupon = useCouponStore()
     const { show } = useToast()
+
+    watchEffect(() => {
+        subtotal.value = items.value.reduce((total, item) => total + (item.quantity * item.price), 0 )
+        taxes.value = Number((subtotal.value * TAX_RATE).toFixed(2))
+        total.value = Number(((subtotal.value + taxes.value) - coupon.discount).toFixed(2))
+    })
 
     function addItem(item) {
         const index = isItemInCart(item.id)
@@ -49,14 +57,6 @@ export const useCart = defineStore('cart', () => {
         items.value = items.value.filter(item => item.id !== id)
     }
 
-    watch(items, () => {
-        subTotal.value = items.value.reduce((total, item) => total + (item.quantity * item.price), 0)
-        taxes.value = subTotal.value * TAX_RATE
-        total.value = subTotal.value + taxes.value
-    }, {
-        deep: true
-    })
-
     return {
         addItem,
         updateQuantity,
@@ -64,7 +64,7 @@ export const useCart = defineStore('cart', () => {
         items,
         isEmpty,
         checkProductAvailability,
-        subTotal,
+        subtotal,
         taxes,
         total
     }

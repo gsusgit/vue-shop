@@ -19,13 +19,9 @@ const notification = {
   }
 }
 
-const cartItems = ref(0) // tempral, hasta que coja el carrito del composable
+const cartItems = ref(0)
 
 const products = useProductsStore()
-
-const filterByCategory = (category) => {
-  console.log(category)
-}
 </script>
 
 <template>
@@ -37,9 +33,7 @@ const filterByCategory = (category) => {
       <h1 class="mb-10 text-center text-5xl font-bold text-gray-900">
         <span class="text-teal-600">Fresh Picks</span> for You
       </h1>
-      <Filter
-        @filter-by-category="filterByCategory"
-      />
+      <Filter />
       <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
         <Product
             v-for="product in products.filteredProducts"

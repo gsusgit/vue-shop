@@ -2,6 +2,9 @@ import { defineStore } from 'pinia'
 import { computed, ref, watch, watchEffect, onMounted } from 'vue'
 import useToast from '@/composables/useToast.js'
 import { useCouponStore } from '@/stores/voucher.js'
+import { addDoc, collection } from 'firebase/firestore'
+import { useFirestore } from 'vuefire'
+import { getCurrentDate } from '@/lib/helpers.js'
 
 export const useCart = defineStore('cart', () => {
     const items = ref([])
@@ -12,8 +15,9 @@ export const useCart = defineStore('cart', () => {
     const TAX_RATE = .10
     const coupon = useCouponStore()
     const { show } = useToast()
+    const db = useFirestore()
 
-    // TODO recalcular cupon si se borra algun item del carrito
+    // TODO recalculate coupon if some item is removed from cart
     watchEffect(() => {
         subtotal.value = items.value.reduce((total, item) => total + (item.quantity * item.price), 0 )
         taxes.value = Number((subtotal.value * TAX_RATE).toFixed(2))
@@ -68,10 +72,44 @@ export const useCart = defineStore('cart', () => {
         items.value = items.value.filter(item => item.id !== id)
     }
 
+    async function checkOut() {
+        const sale = {
+            items: items.value.map(item => ({
+                id: item.id,
+                name: item.name,
+                price: item.price,
+                quantity: item.quantity,
+                image: item.image
+            })),
+            subtotal: subtotal.value,
+            taxes: taxes.value,
+            discount: coupon.discount,
+            total: total.value,
+            date : getCurrentDate()
+        }
+        try {
+            await addDoc(collection(db, 'sales'), sale)
+            $reset()
+            coupon.$reset()
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    function $reset() {
+        // TODO show success feedback or show user past orders
+        subtotal.value = 0
+        taxes.value = 0
+        total.value = 0
+        items.value = []
+    }
+
     return {
         addItem,
         updateQuantity,
         removeItem,
+        checkOut,
+        $reset,
         items,
         isEmpty,
         checkProductAvailability,

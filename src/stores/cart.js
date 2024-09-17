@@ -13,6 +13,7 @@ export const useCart = defineStore('cart', () => {
     const coupon = useCouponStore()
     const { show } = useToast()
 
+    // TODO recalcular cupon si se borra algun item del carrito
     watchEffect(() => {
         subtotal.value = items.value.reduce((total, item) => total + (item.quantity * item.price), 0 )
         taxes.value = Number((subtotal.value * TAX_RATE).toFixed(2))
@@ -21,7 +22,7 @@ export const useCart = defineStore('cart', () => {
 
     watch(items, (newItems) => {
         localStorage.setItem('cartItems', JSON.stringify(newItems))
-    }, { deep: true }) // deep para observar cambios en objetos dentro del array
+    }, { deep: true })
 
     onMounted(() => {
         const savedItems = localStorage.getItem('cartItems')

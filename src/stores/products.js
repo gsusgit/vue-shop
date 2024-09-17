@@ -1,4 +1,4 @@
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { defineStore } from 'pinia'
 import { useFirestore, useCollection, useFirebaseStorage } from 'vuefire'
 import { collection, addDoc, updateDoc, deleteDoc, doc } from 'firebase/firestore'
@@ -21,6 +21,8 @@ export const useProductsStore = defineStore('products', () => {
     const categoryFilter = ref('')
 
     const selectedCategory = ref(0)
+
+    const favourites = ref([])
 
     async function createProduct(product) {
         await addDoc(collection(db, 'products'), product)
@@ -76,14 +78,41 @@ export const useProductsStore = defineStore('products', () => {
         return categoryFilter.value ? products.value.filter(product => product.category) : products.value
     })
 
+    const addToFavourites = (product, id) => {
+        favourites.value.push({...product, id: id})
+    }
+
+    const removeFromFavourites = (product) => {
+        favourites.value = favourites.value.filter(favourite => favourite.id !== product.id)
+    }
+
+    watch(favourites, (newItems) => {
+        localStorage.setItem('favourites', JSON.stringify(newItems))
+    }, { deep: true })
+
+    onMounted(() => {
+        const savedItems = localStorage.getItem('favourites')
+        if (savedItems) {
+            favourites.value = JSON.parse(savedItems)
+        }
+    })
+
+    const isFavourite = (product) => {
+        return favourites.value.some(item => item.id === product.id)
+    }
+
     return {
         createProduct,
         updateProduct,
         removeProduct,
+        addToFavourites,
+        removeFromFavourites,
+        isFavourite,
         filteredProducts,
         filterCategories,
         categoryOptions,
         productsCollection,
-        selectedCategory
+        selectedCategory,
+        favourites
     }
 })

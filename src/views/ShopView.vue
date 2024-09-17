@@ -23,6 +23,7 @@ const products = useProductsStore()
 const loading = ref(true)
 
 onMounted(() => {
+  products.selectedCategory = 0
   setTimeout(() => {
     loading.value = false
   }, 1500)

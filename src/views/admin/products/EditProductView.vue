@@ -46,7 +46,6 @@ const formData = reactive({
 })
 const router = useRouter()
 
-// Watch for changes in the price field to ensure it always has two decimal places
 watch(() => formData.price, (newValue) => {
   if (newValue !== '') {
     formData.price = parseFloat(newValue).toFixed(2)

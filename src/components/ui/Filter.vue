@@ -1,10 +1,8 @@
 <script setup>
-import { computed } from 'vue'
 import { useProductsStore } from '@/stores/products.js'
 
 const products = useProductsStore()
 
-// Computed property to check if the category is selected
 const isSelected = (categoryValue) => {
   return products.selectedCategory === categoryValue
 }

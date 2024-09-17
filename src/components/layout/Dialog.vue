@@ -19,7 +19,6 @@ const handleConfirm = () => {
 
 <template>
   <div
-      id="modelConfirm"
       :class="modal.show ? '' : 'hidden'"
       @click.self="closeModal"
       class="fixed z-50 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full px-4">

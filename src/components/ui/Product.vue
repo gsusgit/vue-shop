@@ -83,12 +83,12 @@ const toggleFavorite = () => {
             d="M21 21l-4.35-4.35M17.25 10.5a6.75 6.75 0 1 1-13.5 0 6.75 6.75 0 0 1 13.5 0z"/>
       </svg>
     </button>
-    <a href="#">
+    <RouterLink :to="{name: 'product', params: {id: product.id}}">
       <img
           class="p-8 rounded-t-lg"
           :src="product.image"
           alt="product image"/>
-    </a>
+    </RouterLink>
     <div
         class="px-5 pb-5 flex flex-col flex-grow">
       <a href="#"
@@ -120,7 +120,6 @@ const toggleFavorite = () => {
           stock</p>
       </div>
     </div>
-    <Dialog
-        :modal="dialog"/>
+    <Dialog :modal="dialog"/>
   </div>
 </template>

@@ -58,10 +58,10 @@ const toggleFavorite = () => {
           />
         </div>
         <div class="md:flex-1 px-4">
-          <h2 class="text-4xl mb-5 font-bold text-gray-800">
+          <h2 class="text-3xl mb-5 font-bold text-gray-800">
             {{ product?.name }}</h2>
           <div class="mt-10">
-            <p class="text-gray-600 text-xl">
+            <p class="text-gray-600 text-lg">
               {{ product?.description }}
             </p>
           </div>
@@ -84,7 +84,7 @@ const toggleFavorite = () => {
               <button
                   @click="cart.addItem(product)"
                   :disabled="cart.checkProductAvailability(product) === 0"
-                  class=" flex items-center justify-center rounded-lg bg-teal-600 px-5 py-2.5 text-xl font-medium text-white hover:bg-teal-700 focus:outline-none focus:ring-4 focus:ring-teal-300 disabled:bg-gray-200"
+                  class=" flex items-center justify-center rounded-lg bg-teal-600 px-5 py-2.5 text-lg font-medium text-white hover:bg-teal-700 focus:outline-none focus:ring-4 focus:ring-teal-300 disabled:bg-gray-200"
               >
                 <span class="ml-1">Add to cart</span>
               </button>
@@ -92,11 +92,11 @@ const toggleFavorite = () => {
             <div class="px-2">
               <button
                   @click="toggleFavorite"
-                  class=" flex items-center justify-center rounded-lg bg-neutral-200 px-5 py-2.5 text-xl font-medium text-neutral-800 hover:bg-neutral-950 focus:outline-none focus:ring-4 focus:ring-neutral-300 hover:text-white"
+                  class=" flex items-center justify-center rounded-lg bg-neutral-200 px-5 py-2.5 text-lg font-medium text-neutral-800 hover:bg-neutral-950 focus:outline-none focus:ring-4 focus:ring-neutral-300 hover:text-white"
               >
                   <span class="ml-1">
                     {{
-                      products.isFavourite(product) ? 'Remove from wishlist' : 'Add to whishlist'
+                      products.isFavourite(product) ? 'Remove from wishlist' : 'Add to wishlist'
                     }}
                   </span>
               </button>

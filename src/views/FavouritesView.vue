@@ -39,11 +39,11 @@ const toggleFavourite = (product) => {
 
 <template>
   <div v-if="!loading">
-    <h1 class="mb-4 mt-5 text-xl font-semibold leading-none tracking-tight text-gray-900">Favourites</h1>
+    <h1 class="mb-4 mt-5 text-xl font-semibold leading-none tracking-tight text-gray-900">Your Wishlist</h1>
     <div v-if="products.favourites.length > 0">
       <p>Here you can see all the products you've added to your favorites list. Browse through and quickly find your favorite items!</p>
       <div
-          class="grid grid-cols-1 gap-4">
+          class="mt-5 grid grid-cols-1 gap-4">
         <div class="col-span-2">
           <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
             <Product

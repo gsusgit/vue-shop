@@ -1,6 +1,6 @@
 <script setup>
 import { useProductsStore } from '@/stores/products.js'
-import ProductListItemView from '@/views/admnin/products/ProductListItemView.vue'
+import ProductListItemView from '@/views/admin/products/ProductListItemView.vue'
 
 const products = useProductsStore()
 </script>

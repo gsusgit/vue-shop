@@ -25,7 +25,7 @@ const voucher = useCouponStore()
                 <div class="relative">
                   <input
                       type="text"
-                      class="block w-full p-4 text-md text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:bg-gray-100 focus:ring-teal-500 focus:border-teal-500"
+                      class="block w-full p-4 text-md text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:bg-gray-50 focus:ring-teal-500 focus:border-teal-500"
                       placeholder="Enter code..."
                       required
                       v-model="voucher.couponInput"

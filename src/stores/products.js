@@ -117,18 +117,6 @@ export const useProductsStore = defineStore('products', () => {
         return favourites.value.some(item => item.id === product.id)
     }
 
-    const arrangeProducts = (query) => {
-        if (query === 'price-asc') {
-            filteredProducts.value.sort((a, b) => a.price - b.price)
-        } else if (query === 'price-desc') {
-            filteredProducts.value.sort((a, b) => b.price - a.price)
-        } else if (query === 'name-asc') {
-            filteredProducts.value.sort((a, b) => a.name.localeCompare(b.name))
-        } else if (query === 'name-desc') {
-            filteredProducts.value.sort((a, b) => b.name.localeCompare(a.name))
-        }
-    }
-
     const relatedProducts = (id) =>
         filteredProducts.value.filter(p => p.id !== id)
 
@@ -140,7 +128,6 @@ export const useProductsStore = defineStore('products', () => {
         addToFavourites,
         removeFromFavourites,
         isFavourite,
-        arrangeProducts,
         getProduct,
         relatedProducts,
         filteredProducts,

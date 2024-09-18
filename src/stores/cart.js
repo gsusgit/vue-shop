@@ -16,6 +16,7 @@ export const useCart = defineStore('cart', () => {
     const coupon = useCouponStore()
     const { show } = useToast()
     const db = useFirestore()
+    const processingPayment = ref(false)
 
     watchEffect(() => {
         subtotal.value = items.value.reduce((total, item) => total + (item.quantity * item.price), 0 )
@@ -73,6 +74,7 @@ export const useCart = defineStore('cart', () => {
     }
 
     async function checkOut() {
+        processingPayment.value = true
         const sale = {
             items: items.value.map(item => ({
                 id: item.id,
@@ -89,7 +91,6 @@ export const useCart = defineStore('cart', () => {
         }
         try {
             await addDoc(collection(db, 'sales'), sale)
-
             items.value.forEach(async (item) => {
                 const productRef = doc(db, 'products', item.id)
                 await runTransaction(db, async(transaction) => {
@@ -98,9 +99,11 @@ export const useCart = defineStore('cart', () => {
                     transaction.update(productRef, {stock: availability})
                 })
             })
-
-            $reset()
-            coupon.$reset()
+            setTimeout(() => {
+                processingPayment.value = false
+                $reset()
+                coupon.$reset()
+            }, 3000)
         } catch (error) {
             console.log(error)
         }
@@ -125,6 +128,7 @@ export const useCart = defineStore('cart', () => {
         checkProductAvailability,
         subtotal,
         taxes,
-        total
+        total,
+        processingPayment
     }
 })

@@ -9,7 +9,7 @@ import { onMounted, ref } from 'vue'
 import Spinner from '@/components/layout/shared/Spinner.vue'
 
 const notification = {
-  title: 'Your cart is empty',
+  title: 'Oops! Nothing here',
   message: 'No products have been added to the cart yet',
   button1: {
     text: 'Go shopping now!',

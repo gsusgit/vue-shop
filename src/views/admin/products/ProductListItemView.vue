@@ -3,7 +3,6 @@ import { formatCurrency } from '@/lib/helpers.js'
 import { useProductsStore } from '@/stores/products.js'
 import { ref } from 'vue'
 import Dialog from '@/components/layout/Dialog.vue'
-import { useCart } from '@/stores/cart.js'
 
 const props = defineProps({
   product: {
@@ -13,7 +12,6 @@ const props = defineProps({
 })
 
 const products = useProductsStore()
-const cart = useCart()
 
 const modal = ref({
   message: '',
@@ -73,10 +71,10 @@ const getCategoryLabelById = (id) => {
     </td>
     <td class="px-6 py-4">
       <span
-          :class="[cart.checkProductAvailability(product) === 0 ? 'bg-red-50 text-red-800 border border-red-100' : 'bg-teal-50 border border-teal-100 text-teal-800']"
+          :class="[product.stock === 0 ? 'bg-red-50 text-red-800 border border-red-100' : 'bg-teal-50 border border-teal-100 text-teal-800']"
           class="px-2 py-1 rounded-xl shadow-2xl text-xs font-medium">
                   {{
-          cart.checkProductAvailability(product) === 0 ? 'Out of stock' : cart.checkProductAvailability(product) + ' in stock'
+          product.stock === 0 ? 'Out of stock' : product.stock + ' in stock'
         }}
                 </span>
     </td>

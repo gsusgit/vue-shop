@@ -16,12 +16,16 @@ const cart = useCart()
 <template>
   <li class="flex items-center justify-between py-6">
     <div class="flex items-center space-x-6">
-      <img
-          :src="item.image"
-          class="h-20 w-20 flex-none rounded-md border border-gray-200"
-          :alt="item.name">
+      <RouterLink :to="{name: 'product', params: {id: item.id}}">
+        <img
+            :src="item.image"
+            class="h-20 w-20 flex-none rounded-md border border-gray-200 hover:border-gray-300"
+            :alt="item.name" />
+      </RouterLink>
       <div class="flex-auto space-y-2">
-        <h3 class="text-gray-900" style="min-width: 350px;">{{ item.name }}</h3>
+        <RouterLink :to="{name: 'product', params: {id: item.id}}">
+          <h3 class="text-gray-900 hover:text-teal-700" style="min-width: 350px;">{{ item.name }}</h3>
+        </RouterLink>
         <p class="font-semibold">{{ formatCurrency(item.price) }}</p>
       </div>
     </div>

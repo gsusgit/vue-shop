@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { computed, ref, watch, watchEffect, onMounted } from 'vue'
 import useToast from '@/composables/useToast.js'
 import { useCouponStore } from '@/stores/voucher.js'
-import { addDoc, collection } from 'firebase/firestore'
+import { addDoc, collection, doc, runTransaction } from 'firebase/firestore'
 import { useFirestore } from 'vuefire'
 import { getCurrentDate } from '@/lib/helpers.js'
 
@@ -89,6 +89,16 @@ export const useCart = defineStore('cart', () => {
         }
         try {
             await addDoc(collection(db, 'sales'), sale)
+
+            items.value.forEach(async (item) => {
+                const productRef = doc(db, 'products', item.id)
+                await runTransaction(db, async(transaction) => {
+                    const currentProduct = await transaction.get(productRef)
+                    const availability = currentProduct.data().stock - item.quantity
+                    transaction.update(productRef, {stock: availability})
+                })
+            })
+
             $reset()
             coupon.$reset()
         } catch (error) {

@@ -6,10 +6,11 @@ export const useCouponStore = defineStore('coupon', () => {
 
     const cart = useCart()
     const couponInput = ref('')
-    const couponValidationMessage = ref('')
     const discountPercentage  = ref(0)
     const discount = ref(0)
     const discountDescription = ref('')
+    const applyingDiscount = ref(false)
+    const showError = ref(false)
 
     const VALID_COUPONS = [
         { name: '10SALE', discount: .10},
@@ -17,30 +18,35 @@ export const useCouponStore = defineStore('coupon', () => {
     ]
 
     watch(discountPercentage, () => {
-        discount.value = (cart.total * discountPercentage.value ).toFixed(2)
+        discount.value = (cart.subtotal * discountPercentage.value ).toFixed(2)
         discountDescription.value = (discountPercentage.value * 100) + '% OFF'
     })
 
-    function applyCoupon() {
-        if(VALID_COUPONS.some(coupon => coupon.name === couponInput.value )) {
-            couponValidationMessage.value = 'Applying coupon...'
+    function recalculateSavings() {
+        discount.value = (cart.subtotal * discountPercentage.value ).toFixed(2)
+    }
 
+    function applyCoupon() {
+        showError.value = false
+        applyingDiscount.value = true
+        if(VALID_COUPONS.some(coupon => coupon.name === couponInput.value )) {
             setTimeout(() => {
                 discountPercentage.value = VALID_COUPONS.find(coupon => coupon.name === couponInput.value).discount
-                couponValidationMessage.value = 'Discount applyed!'
-            }, 3000);
+                applyingDiscount.value = false
+            }, 3000)
 
         } else {
-            couponValidationMessage.value = 'Invalid coupon'
+            setTimeout(() => {
+                showError.value = true
+                applyingDiscount.value = false
+                discountDescription.value = 'Coupon not valid'
+            }, 3000)
         }
-        setTimeout(() => {
-            couponValidationMessage.value = ''
-        }, 6000);
     }
 
     function $reset() {
         couponInput.value = ''
-        couponValidationMessage.value = ''
+        applyingDiscount.value = false
         discountPercentage.value  = 0
         discount.value = 0
     }
@@ -53,7 +59,9 @@ export const useCouponStore = defineStore('coupon', () => {
         discountDescription,
         applyCoupon,
         $reset,
-        couponValidationMessage,
-        isValidCoupon
+        recalculateSavings,
+        applyingDiscount,
+        isValidCoupon,
+        showError
     }
 })

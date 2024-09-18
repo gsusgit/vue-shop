@@ -68,7 +68,7 @@ onMounted(() => {
                 <dt class="text-base font-normal text-gray-500">Cart amount</dt>
                 <dd class="text-base font-medium text-gray-900">{{formatCurrency(cart.subtotal)}}</dd>
               </dl>
-              <dl v-if="coupon.discountDescription !== ''" class="flex items-center justify-between gap-4">
+              <dl v-if="coupon.discount > 0" class="flex items-center justify-between gap-4">
                 <dt class="text-base font-normal text-gray-500">Savings ({{coupon.discountDescription}})</dt>
                 <dd class="text-base font-medium text-teal-600">-{{formatCurrency(coupon.discount)}}</dd>
               </dl>
@@ -93,7 +93,7 @@ onMounted(() => {
             <span class="ml-1">Proceed to Checkout</span>
           </a>
         </div>
-        <div class="w-full mt-10 lg:w-1/3 sm:w-1 sm:p-6">
+        <div class="w-full mt-4 lg:w-1/3 sm:w-1 sm:p-6">
           <Voucher />
         </div>
       </div>

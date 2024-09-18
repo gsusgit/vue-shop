@@ -17,9 +17,9 @@ export const useCart = defineStore('cart', () => {
     const { show } = useToast()
     const db = useFirestore()
 
-    // TODO recalculate coupon if some item is removed from cart
     watchEffect(() => {
         subtotal.value = items.value.reduce((total, item) => total + (item.quantity * item.price), 0 )
+        coupon.recalculateSavings()
         taxes.value = Number((subtotal.value * TAX_RATE).toFixed(2))
         total.value = Number(((subtotal.value + taxes.value) - coupon.discount).toFixed(2))
     })

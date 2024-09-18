@@ -67,14 +67,14 @@ const toggleFavorite = () => {
           </div>
           <div class="my-5">
             <div class="my-10">
-              <span class="text-neutral-600 font-bold text-3xl">{{ formatCurrency(product?.price) }}</span>
+              <span class="text-neutral-600 font-black text-3xl">{{ formatCurrency(product?.price) }}</span>
             </div>
             <div class="mb-5">
                 <span
-                    :class="[cart.checkProductAvailability(product) === 0 ? 'bg-gray-100 text-red-800 border-red-800' : 'bg-gray-100 text-teal-800']"
-                    class="px-4 py-1 rounded-xl shadow-2xl text-lg font-medium">
+                    :class="[cart.checkProductAvailability(product) === 0 ? 'bg-red-50 text-red-800 border border-red-100' : 'bg-teal-50 border border-teal-100 text-teal-800']"
+                    class="px-4 py-1 rounded-xl shadow-2xl text-md font-medium">
                   {{
-                    cart.checkProductAvailability(product) === 0 ? 'Out of stock' : cart.checkProductAvailability(product) + ' available'
+                    cart.checkProductAvailability(product) === 0 ? 'Out of stock' : cart.checkProductAvailability(product) + ' in stock'
                   }}
                 </span>
             </div>

@@ -102,22 +102,27 @@ const toggleFavorite = () => {
           class="flex items-center justify-between mt-4">
         <span
             class="text-sm font-bold text-gray-900">{{ formatCurrency(product.price) }}</span>
-        <a
-            href="#"
-            class="bg-neutral-200 text-neutral-800 hover:bg-teal-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-xs px-2 py-1 text-center"
+        <button
+            class="bg-teal-600 text-white hover:bg-teal-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-xs px-2 py-1 text-center disabled:bg-neutral-200 disabled:text-neutral-400"
+            :disabled="product.stock === 0"
             @click="cart.addItem(product)"
         >
           Add
           to
           cart
-        </a>
+        </button>
       </div>
       <div
           class="mt-2">
-        <p class="text-sm text-teal-700 font-medium">
-          {{ cart.checkProductAvailability(product) }}
-          in
-          stock</p>
+        <p class="font-medium">
+          <span
+              :class="[cart.checkProductAvailability(product) === 0 ? 'bg-red-50 text-red-800 border border-red-100' : 'bg-teal-50 border border-teal-100 text-teal-800']"
+              class="px-2 py-1 rounded-xl shadow-2xl text-xs font-medium">
+                  {{
+              cart.checkProductAvailability(product) === 0 ? 'Out of stock' : cart.checkProductAvailability(product) + ' in stock'
+            }}
+                </span>
+        </p>
       </div>
     </div>
     <Dialog :modal="dialog"/>

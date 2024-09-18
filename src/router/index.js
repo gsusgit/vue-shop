@@ -58,7 +58,15 @@ const router = createRouter({
           path: '/backoffice/import-demo',
           name: 'import-demo',
           component: () => import('../views/backoffice/products/SeederView.vue')
-        }
+        },
+        {
+          path: '/backoffice',
+          redirect: '/backoffice/sales',
+        },
+        {
+          path: '/backoffice/:pathMatch(.*)*',
+          redirect: '/backoffice',
+        },
       ]
     }
   ]

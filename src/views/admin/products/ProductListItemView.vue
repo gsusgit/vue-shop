@@ -72,11 +72,10 @@ const getCategoryLabelById = (id) => {
     <td class="px-6 py-4">
       <span
           :class="[product.stock === 0 ? 'bg-red-50 text-red-800 border border-red-100' : 'bg-teal-50 border border-teal-100 text-teal-800']"
-          class="px-2 py-1 rounded-xl shadow-2xl text-xs font-medium">
-                  {{
-          product.stock === 0 ? 'Out of stock' : product.stock + ' in stock'
-        }}
-                </span>
+          class="px-2 py-1 rounded-xl shadow-2xl text-xs font-medium"
+      >
+        {{product.stock === 0 ? 'Out of stock' : product.stock + ' in stock' }}
+      </span>
     </td>
     <td class="px-6 py-4">
       {{ formatCurrency(product.price) }}

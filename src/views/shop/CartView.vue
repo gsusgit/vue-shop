@@ -1,9 +1,9 @@
 <script setup>
 import { useCart } from '@/stores/cart.js'
-import Notification from '@/components/layout/Notification.vue'
-import CartItem from '@/components/ui/CartItem.vue'
-import { formatCurrency } from '../lib/helpers.js'
-import Voucher from '@/components/ui/Voucher.vue'
+import Notification from '@/components/layout/shared/Notification.vue'
+import CartItem from '@/components/ui/shop/CartItem.vue'
+import { formatCurrency } from '../../lib/helpers.js'
+import Voucher from '@/components/ui/shop/Voucher.vue'
 import { useCouponStore } from '@/stores/voucher.js'
 
 const notification = {

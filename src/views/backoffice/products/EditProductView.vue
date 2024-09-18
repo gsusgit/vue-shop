@@ -6,7 +6,7 @@ import useImage from '@/composables/useImage.js'
 import { useProductsStore } from '@/stores/products.js'
 import useToast from '@/composables/useToast.js'
 import { CameraIcon } from '@heroicons/vue/24/outline'
-import PageTitle from '@/components/layout/PageTitle.vue'
+import PageTitle from '@/components/layout/base/PageTitle.vue'
 import { useFirestore, useDocument } from 'vuefire'
 import { doc } from 'firebase/firestore'
 

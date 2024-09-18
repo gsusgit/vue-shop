@@ -1,7 +1,7 @@
 <script setup>
 import { formatCurrency } from '@/lib/helpers.js'
 import { onMounted, ref, watch } from 'vue'
-import Dialog from '@/components/layout/Dialog.vue'
+import Dialog from '@/components/layout/shared/Dialog.vue'
 import { useCart } from '@/stores/cart.js'
 import { defineEmits } from 'vue'
 import { useProductsStore } from '@/stores/products.js'

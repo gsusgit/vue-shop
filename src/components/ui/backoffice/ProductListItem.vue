@@ -2,7 +2,7 @@
 import { formatCurrency } from '@/lib/helpers.js'
 import { useProductsStore } from '@/stores/products.js'
 import { ref } from 'vue'
-import Dialog from '@/components/layout/Dialog.vue'
+import Dialog from '@/components/layout/shared/Dialog.vue'
 
 const props = defineProps({
   product: {

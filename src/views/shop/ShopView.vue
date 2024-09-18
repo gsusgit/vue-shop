@@ -1,16 +1,16 @@
 <script setup>
-import Filter from '@/components/ui/Filter.vue'
-import Product from '@/components/ui/Product.vue'
+import Filter from '@/components/ui/shop/Filter.vue'
+import Product from '@/components/ui/shop/Product.vue'
 import { useProductsStore } from '@/stores/products.js'
-import Notification from '@/components/layout/Notification.vue'
+import Notification from '@/components/layout/shared/Notification.vue'
 import { onMounted, ref } from 'vue'
-import Spinner from '@/components/layout/Spinner.vue'
+import Spinner from '@/components/layout/shared/Spinner.vue'
 
 const notification = {
   title: 'Store is empty',
   message: 'No products have been added to the store yet',
   button1: {
-    text: 'Go to the admin panel and start adding products',
+    text: 'Go to the backoffice and start adding products',
     route: ''
   },
   button2: {

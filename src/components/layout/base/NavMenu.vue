@@ -7,7 +7,7 @@ import { useProductsStore } from '@/stores/products.js'
 
 const route = useRoute()
 
-const isAdminRoute = computed(() => route.path.startsWith('/admin'))
+const isAdminRoute = computed(() => route.path.startsWith('/backoffice'))
 
 const cart = useCart()
 const products = useProductsStore()
@@ -40,7 +40,7 @@ const products = useProductsStore()
   <div v-else class="hidden w-full md:block md:w-auto" id="navbar-multi-level">
     <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 rtl:space-x-reverse md:flex-row md:mt-0">
       <NavItem to="products" type="link">Products</NavItem>
-      <NavItem to="orders" type="link">Orders</NavItem>
+      <NavItem to="sales" type="link">Sales</NavItem>
       <NavItem to="home" type="button">Go to shop</NavItem>
     </ul>
   </div>

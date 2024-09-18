@@ -1,6 +1,6 @@
 <script setup>
-import Logo from '@/components/layout/Logo.vue'
-import NavMenu from '@/components/layout/NavMenu.vue'
+import Logo from '@/components/layout/base/Logo.vue'
+import NavMenu from '@/components/layout/base/NavMenu.vue'
 
 </script>
 

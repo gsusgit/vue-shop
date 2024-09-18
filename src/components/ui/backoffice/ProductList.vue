@@ -1,6 +1,6 @@
 <script setup>
 import { useProductsStore } from '@/stores/products.js'
-import ProductListItem from '@/components/ui/ProductListItem.vue'
+import ProductListItem from '@/components/ui/backoffice/ProductListItem.vue'
 
 const products = useProductsStore()
 </script>

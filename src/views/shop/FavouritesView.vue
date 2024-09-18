@@ -1,9 +1,9 @@
 <script setup>
-import Product from '@/components/ui/Product.vue'
+import Product from '@/components/ui/shop/Product.vue'
 import { useProductsStore } from '@/stores/products.js'
-import Notification from '@/components/layout/Notification.vue'
+import Notification from '@/components/layout/shared/Notification.vue'
 import { onMounted, ref } from 'vue'
-import Spinner from '@/components/layout/Spinner.vue'
+import Spinner from '@/components/layout/shared/Spinner.vue'
 
 const notification = {
   title: 'Oops, nothing here...',

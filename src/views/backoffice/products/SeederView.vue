@@ -3,7 +3,7 @@ import { ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage'
 import { collection, addDoc } from 'firebase/firestore'
 import { useFirebaseStorage, useFirestore } from 'vuefire'
 import { products } from '@/data/products.js'
-import PageTitle from '@/components/layout/PageTitle.vue'
+import PageTitle from '@/components/layout/base/PageTitle.vue'
 import useToast from '@/composables/useToast.js'
 import { useRouter } from 'vue-router'
 

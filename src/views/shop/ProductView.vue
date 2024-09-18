@@ -5,9 +5,9 @@ import { doc } from 'firebase/firestore'
 import { formatCurrency } from '@/lib/helpers.js'
 import { useCart } from '@/stores/cart.js'
 import { onMounted, ref } from 'vue'
-import Dialog from '@/components/layout/Dialog.vue'
+import Dialog from '@/components/layout/shared/Dialog.vue'
 import { useProductsStore } from '@/stores/products.js'
-import RelatedProduct from '@/components/ui/RelatedProduct.vue'
+import RelatedProduct from '@/components/ui/shop/RelatedProduct.vue'
 
 const route = useRoute()
 const db = useFirestore()

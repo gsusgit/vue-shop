@@ -114,7 +114,7 @@ const toggleFavorite = () => {
       </div>
       <div
           class="mt-2">
-        <p class="font-medium">
+        <p>
           <span
               :class="[cart.checkProductAvailability(product) === 0 ? 'bg-red-50 text-red-800 border border-red-100' : 'bg-teal-50 border border-teal-100 text-teal-800']"
               class="px-2 py-1 rounded-xl shadow-2xl text-xs font-medium">

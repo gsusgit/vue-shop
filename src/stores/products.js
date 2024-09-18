@@ -1,7 +1,7 @@
 import { computed, onMounted, ref, watch } from 'vue'
 import { defineStore } from 'pinia'
-import { useFirestore, useCollection, useFirebaseStorage } from 'vuefire'
-import { collection, addDoc, updateDoc, deleteDoc, doc } from 'firebase/firestore'
+import { useFirestore, useCollection, useFirebaseStorage, useDocument } from 'vuefire'
+import { collection, addDoc, updateDoc, deleteDoc, doc,getDoc } from 'firebase/firestore'
 import { ref as storageRef, deleteObject } from 'firebase/storage'
 
 export const useProductsStore = defineStore('products', () => {
@@ -33,6 +33,22 @@ export const useProductsStore = defineStore('products', () => {
             await updateDoc(docRef, product)
         } catch (error) {
             console.log(error)
+        }
+    }
+
+    const getProduct = async (id) => {
+        try {
+            const docRef = doc(db, 'products', id)
+            const productSnap = await getDoc(docRef)
+
+            if (productSnap.exists()) {
+                return { ...productSnap.data() }
+            } else {
+                return null
+            }
+        } catch (error) {
+            console.error('Error getting document:', error)
+            return null;
         }
     }
 
@@ -121,6 +137,7 @@ export const useProductsStore = defineStore('products', () => {
         removeFromFavourites,
         isFavourite,
         arrangeProducts,
+        getProduct,
         filteredProducts,
         filterCategories,
         categoryOptions,

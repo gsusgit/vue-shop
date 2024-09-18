@@ -1,16 +1,13 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 
-const props = defineProps({
+defineProps({
   product: {
     type: Object,
     required: true
   }
 })
 
-const reload = () => {
-  window.location.href = '/product/' + props.product.id
-}
 </script>
 
 <template>
@@ -20,7 +17,6 @@ const reload = () => {
           class="p-8 rounded-t-lg"
           :src="product.image"
           alt="product image"
-          @click="reload"
       />
     </RouterLink>
     <div

@@ -18,7 +18,7 @@ const modal = ref({
   show: false
 })
 
-const removeProduct = (id) => {
+const removeProduct = () => {
   modal.value.show = true
   modal.value.message = 'Are you sure you want to delete this product?'
 }

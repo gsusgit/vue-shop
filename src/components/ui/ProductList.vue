@@ -1,6 +1,6 @@
 <script setup>
 import { useProductsStore } from '@/stores/products.js'
-import ProductListItemView from '@/views/admin/products/ProductListItemView.vue'
+import ProductListItem from '@/components/ui/ProductListItem.vue'
 
 const products = useProductsStore()
 </script>
@@ -37,7 +37,7 @@ const products = useProductsStore()
       </tr>
       </thead>
       <tbody>
-      <ProductListItemView
+      <ProductListItem
         v-for="product in products.productsCollection"
         :product="product"
       />

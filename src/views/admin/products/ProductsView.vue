@@ -1,6 +1,6 @@
 <script setup>
 import PageTitle from '@/components/layout/PageTitle.vue'
-import ProductListView from '@/views/admin/products/ProductListView.vue'
+import ProductList from '@/components/ui/ProductList.vue'
 import { useProductsStore } from '@/stores/products.js'
 import Notification from '@/components/layout/Notification.vue'
 import { onMounted, ref } from 'vue'
@@ -43,7 +43,7 @@ onMounted(() => {
           v-else
           :notification="notification"/>
     </div>
-    <ProductListView />
+    <ProductList />
   </div>
   <div v-else>
     <Spinner />

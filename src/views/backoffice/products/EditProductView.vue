@@ -55,12 +55,6 @@ const formData = reactive({
 })
 const router = useRouter()
 
-watch(() => formData.price, (newValue) => {
-  if (newValue !== '') {
-    formData.price = parseFloat(newValue).toFixed(2)
-  }
-})
-
 const handleImageClick = () => {
   if (fileInputRef.value) {
     fileInputRef.value.click()
@@ -143,7 +137,7 @@ const triggerToast = () => {
                   placeholder="Product price"
                   validation="required"
                   :validation-messages="{ required: 'Price is required' }"
-                  min="0.01"
+                  min="0"
                   step="0.01"
                   v-model.number="formData.price"
               />

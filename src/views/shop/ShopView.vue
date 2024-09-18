@@ -26,7 +26,7 @@ onMounted(() => {
   products.selectedCategory = 0
   setTimeout(() => {
     loading.value = false
-  }, 1500)
+  }, 1000)
 })
 
 const toggleFavourite = (product) => {

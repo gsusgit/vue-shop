@@ -129,6 +129,10 @@ export const useProductsStore = defineStore('products', () => {
         }
     }
 
+    const relatedProducts = (id) =>
+        filteredProducts.value.filter(p => p.id !== id)
+
+
     return {
         createProduct,
         updateProduct,
@@ -138,6 +142,7 @@ export const useProductsStore = defineStore('products', () => {
         isFavourite,
         arrangeProducts,
         getProduct,
+        relatedProducts,
         filteredProducts,
         filterCategories,
         categoryOptions,

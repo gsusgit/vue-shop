@@ -38,7 +38,7 @@ const getProductData = async (id) => {
       .then(data => {
         product.value = data
         products.selectedCategory = product.value.category
-        relatedProducts.value = products.filteredProducts.filter(p => p.id !== product.value.id)
+        relatedProducts.value = products.relatedProducts(id)
       })
       .catch(() => {
         show('Product not found', 'error')
@@ -46,7 +46,7 @@ const getProductData = async (id) => {
       })
   setTimeout(() => {
     loading.value = false
-  }, 500)
+  }, 1000)
 }
 
 const openDialog = () => {

@@ -6,29 +6,65 @@ import Spinner from '@/components/layout/shared/Spinner.vue'
 import { useSales } from '@/stores/sales.js'
 import Sale from '@/components/ui/backoffice/Sale.vue'
 import { formatCurrency } from '@/lib/helpers.js'
+import Dialog from '@/components/layout/shared/Dialog.vue'
+import useToast from '@/composables/useToast.js'
 
 const loading = ref(true)
 const sales = useSales()
-
+const { show } = useToast()
+const modal = ref({
+  message: '',
+  show: false
+})
+const showRemoveButton = ref(true)
 const formatter = ref({
   date: 'DD/MM/YYYY',
   month: 'MMMM',
 })
 
 onMounted(() => {
+  sales.checkDocuments()
   setTimeout(() => {
     loading.value = false
   }, 1000)
 })
 
+const confirmSalesRemoval = () => {
+  modal.value.show = false
+  modal.message = ''
+  sales.removeSales()
+  show('Sales were removed', 'success')
+  showRemoveButton.value = false
+}
+
+const removeSales = () => {
+  modal.value.show = true
+  modal.value.message = 'Are you sure you want to delete all sales?'
+}
+
 </script>
 
 <template>
+  <Dialog
+      :modal="modal"
+      @confirm-product-removal="confirmSalesRemoval"
+  />
   <div v-if="loading">
     <Spinner />
   </div>
   <div v-else>
     <PageTitle title="Sales" parentTitle="Admin" />
+    <div
+        v-if="sales.areDocumentsAvailable && showRemoveButton"
+        class="my-4 ms-auto"
+    >
+      <button
+          class="focus:outline-none text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+          @click="removeSales"
+      >
+        Remove all sales
+      </button>
+    </div>
     <div v-if="sales.isDateSelected">
       <p v-if="sales.totalSalesForSelectedDate > 0" class="mt-5 text-lg font-bold">Total: {{ formatCurrency(sales.totalSalesForSelectedDate) }}</p>
       <div v-else class="mt-5 flex items-center">

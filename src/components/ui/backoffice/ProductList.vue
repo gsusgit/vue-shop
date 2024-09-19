@@ -36,7 +36,6 @@ const confirmProductsRemoval = () => {
 const removeSelectedProducts = () => {
   modal.value.show = true
   modal.value.message = 'Are you sure you want to delete all the products?'
-  console.log('Removing selected products', selectedProducts)
 }
 
 </script>

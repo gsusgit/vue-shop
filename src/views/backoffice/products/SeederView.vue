@@ -38,6 +38,8 @@ async function seedDB() {
 }
 
 const triggerToast = () => {
+  localStorage.removeItem('cartItems')
+  localStorage.removeItem('favourites')
   show('Products imported', 'success')
   router.push({name: 'products'})
 }

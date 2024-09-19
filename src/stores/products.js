@@ -53,6 +53,8 @@ export const useProductsStore = defineStore('products', () => {
     }
 
     const removeProduct = async (id, imageUrl) => {
+        localStorage.removeItem('cartItems')
+        localStorage.removeItem('favourites')
         const imageRef = storageRef(storage, imageUrl)
         const docRef = doc(db, 'products', id)
         await deleteDoc(docRef)

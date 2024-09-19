@@ -30,6 +30,8 @@ onMounted(() => {
 })
 
 const confirmSalesRemoval = () => {
+  localStorage.removeItem('cartItems')
+  localStorage.removeItem('favourites')
   modal.value.show = false
   modal.message = ''
   sales.removeSales()

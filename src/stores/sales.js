@@ -38,6 +38,8 @@ export const useSales = defineStore('sales', () => {
     const areDocumentsAvailable = computed(() => hasDocuments.value)
 
     const removeSales = async () => {
+        localStorage.removeItem('cartItems')
+        localStorage.removeItem('favourites')
         const colRef = collection(db, 'sales')
         try {
             const snapshot = await getDocs(colRef)

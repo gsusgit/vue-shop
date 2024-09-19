@@ -31,7 +31,7 @@ const toggleFavourite = (product) => {
         class="grid grid-cols-1 gap-4">
       <div class="col-span-2">
         <Filter />
-        <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
+        <div class="mt-5 mb-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
           <Product
               v-for="product in products.filteredProducts"
               :key="product.id"

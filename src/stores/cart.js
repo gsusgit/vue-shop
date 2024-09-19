@@ -1,10 +1,11 @@
 import { defineStore } from 'pinia'
-import { computed, ref, watch, watchEffect, onMounted } from 'vue'
+import { computed, onMounted, ref, watch, watchEffect } from 'vue'
 import useToast from '@/composables/useToast.js'
 import { useCouponStore } from '@/stores/voucher.js'
-import { addDoc, collection, doc, runTransaction } from 'firebase/firestore'
+import { addDoc, collection, doc, runTransaction, query, where, getDocs } from 'firebase/firestore'
 import { useFirestore } from 'vuefire'
 import { getCurrentDate } from '@/lib/helpers.js'
+import { useSales } from '@/stores/sales.js'
 
 export const useCart = defineStore('cart', () => {
     const items = ref([])
@@ -14,6 +15,7 @@ export const useCart = defineStore('cart', () => {
     const MAX_PRODUCTS = 5
     const TAX_RATE = .10
     const coupon = useCouponStore()
+    const sales = useSales()
     const { show } = useToast()
     const db = useFirestore()
     const processingPayment = ref(false)
@@ -73,6 +75,13 @@ export const useCart = defineStore('cart', () => {
         items.value = items.value.filter(item => item.id !== id)
     }
 
+    const generateInvoiceNumber = async (dateStr) => {
+        const q = query(collection(db, 'sales'), where('date', '==', dateStr))
+        const querySnapshot = await getDocs(q)
+        const salesCount = querySnapshot.size
+        return dateStr.split('/').join('') + '-' + (salesCount + 1)
+    }
+
     async function checkOut() {
         processingPayment.value = true
         const sale = {
@@ -87,7 +96,8 @@ export const useCart = defineStore('cart', () => {
             taxes: taxes.value,
             discount: coupon.discount,
             total: total.value,
-            date : getCurrentDate()
+            date : getCurrentDate(),
+            invoice : await generateInvoiceNumber(getCurrentDate())
         }
         try {
             await addDoc(collection(db, 'sales'), sale)
@@ -110,7 +120,6 @@ export const useCart = defineStore('cart', () => {
     }
 
     function $reset() {
-        // TODO show success feedback or show user past orders
         subtotal.value = 0
         taxes.value = 0
         total.value = 0

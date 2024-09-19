@@ -35,7 +35,7 @@ const products = useProductsStore()
         </span>
       </div>
     </NavItem>
-    <NavItem to="sales" type="button">Admin</NavItem>
+    <NavItem to="sales" type="button">Admin Panel</NavItem>
   </div>
   <div v-else class="hidden w-full md:block md:w-auto" id="navbar-multi-level">
     <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 rtl:space-x-reverse md:flex-row md:mt-0">

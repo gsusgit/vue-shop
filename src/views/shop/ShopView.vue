@@ -2,22 +2,8 @@
 import Filter from '@/components/ui/shop/Filter.vue'
 import Product from '@/components/ui/shop/Product.vue'
 import { useProductsStore } from '@/stores/products.js'
-import Notification from '@/components/layout/shared/Notification.vue'
 import { onMounted, ref } from 'vue'
 import Spinner from '@/components/layout/shared/Spinner.vue'
-
-const notification = {
-  title: 'Store is empty',
-  message: 'No products have been added to the store yet',
-  button1: {
-    text: 'Go to the backoffice and start adding products',
-    route: ''
-  },
-  button2: {
-    text: 'Import demo content',
-    route: 'import-demo'
-  }
-}
 
 const products = useProductsStore()
 const loading = ref(true)
@@ -44,11 +30,8 @@ const toggleFavourite = (product) => {
         v-if="products.filteredProducts.length > 0"
         class="grid grid-cols-1 gap-4">
       <div class="col-span-2">
-        <h1 class="mb-10 text-center text-5xl font-bold text-gray-900">
-          <span class="text-teal-600">Fresh Picks</span> for You
-        </h1>
         <Filter />
-        <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
           <Product
               v-for="product in products.filteredProducts"
               :key="product.id"
@@ -59,15 +42,12 @@ const toggleFavourite = (product) => {
         </div>
       </div>
     </div>
-    <div
-        v-else
-        class="mt-5">
-      <Notification
-          :notification="notification"/>
+    <div v-else>
+      <h1 class="mb-4 text-4xl text-center font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl">Store is empty</h1>
+      <p class="mb-4 text-xl text-center font-semibold tracking-tight leading-none">No products have been added yet</p>
     </div>
   </div>
-  <div
-      v-else>
+  <div v-else>
     <Spinner/>
   </div>
 </template>

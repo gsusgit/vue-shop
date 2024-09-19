@@ -42,7 +42,7 @@ const getCategoryLabelById = (id) => {
 }
 
 const toggleSelection = () => {
-  emit('toggleSelection', props.product.id)
+  emit('toggleSelection', props.product)
 }
 </script>
 

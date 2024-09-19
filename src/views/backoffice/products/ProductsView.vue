@@ -1,9 +1,9 @@
 <script setup>
+import { onMounted, ref } from 'vue'
+import { useProductsStore } from '@/stores/products.js'
 import PageTitle from '@/components/layout/base/PageTitle.vue'
 import ProductList from '@/components/ui/backoffice/ProductList.vue'
-import { useProductsStore } from '@/stores/products.js'
 import Notification from '@/components/layout/shared/Notification.vue'
-import { onMounted, ref } from 'vue'
 import Spinner from '@/components/layout/shared/Spinner.vue'
 
 const products = useProductsStore()

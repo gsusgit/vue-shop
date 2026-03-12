@@ -179,12 +179,10 @@ Ejemplo “checkout”:
 
 ## Propuestas de ejercicios
 
-- **Ejercicio 1**: añadir una nueva categoría y que el filtro la soporte (store `products` + UI).
-- **Ejercicio 2**: persistir también `selectedCategory` en `localStorage`.
-- **Ejercicio 3**: crear un composable `useLocalStorageRef(key, defaultValue)` y refactorizar carrito/favoritos.
-- **Ejercicio 4**: mejorar `mockDb` para soportar “búsqueda por texto” (nombre/descripción) y usarlo en la tienda.
-- **Ejercicio 5**: añadir una pantalla “Ventas totales (rango de fechas)” reutilizando store de ventas.
-
-## IDE recomendado
-
-VSCode/Cursor con extensión de Vue (Volar). Si usas VSCode, desactiva Vetur.
+- **Ejercicio 1 (Nivel: Fácil)**: añadir una nueva categoría y que el filtro la soporte (store `products` + UI).
+- **Ejercicio 2 (Nivel: Fácil)**: persistir también `selectedCategory` en `localStorage`.
+- **Ejercicio 3 (Nivel: Medio)**: crear un composable `useLocalStorageRef(key, defaultValue)` y refactorizar carrito/favoritos.
+- **Ejercicio 4 (Nivel: Medio)**: mejorar `mockDb` para soportar “búsqueda por texto” (nombre/descripción) y usarlo en la tienda.
+- **Ejercicio 5 (Nivel: Medio)**: añadir una pantalla “Ventas totales (rango de fechas)” reutilizando store de ventas.
+- **Ejercicio 7 (Nivel: Alto)**: implementar sistema de traducción de la app (i18n) para soportar inglés y español y añadir al menú de navegación.
+- **Ejercicio 8 (Nivel: Alto)**: implementar sistema de autenticación y autorización para el backoffice y añadir al menú de navegación.

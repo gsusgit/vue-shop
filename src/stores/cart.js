@@ -2,10 +2,8 @@ import { defineStore } from 'pinia'
 import { computed, onMounted, ref, watch, watchEffect } from 'vue'
 import useToast from '@/composables/useToast.js'
 import { useCouponStore } from '@/stores/voucher.js'
-import { addDoc, collection, doc, runTransaction, query, where, getDocs } from 'firebase/firestore'
-import { useFirestore } from 'vuefire'
 import { getCurrentDate } from '@/lib/helpers.js'
-import { useSales } from '@/stores/sales.js'
+import * as mockDb from '@/data/mockDb.js'
 
 export const useCart = defineStore('cart', () => {
     const items = ref([])
@@ -15,9 +13,7 @@ export const useCart = defineStore('cart', () => {
     const MAX_PRODUCTS = 5
     const TAX_RATE = .10
     const coupon = useCouponStore()
-    const sales = useSales()
     const { show } = useToast()
-    const db = useFirestore()
     const processingPayment = ref(false)
 
     watchEffect(() => {
@@ -76,9 +72,8 @@ export const useCart = defineStore('cart', () => {
     }
 
     const generateInvoiceNumber = async (dateStr) => {
-        const q = query(collection(db, 'sales'), where('date', '==', dateStr))
-        const querySnapshot = await getDocs(q)
-        const salesCount = querySnapshot.size
+        const daySales = mockDb.getSalesByDate(dateStr)
+        const salesCount = daySales.length
         return dateStr.split('/').join('') + '-' + (salesCount + 1)
     }
 
@@ -100,14 +95,13 @@ export const useCart = defineStore('cart', () => {
             invoice : await generateInvoiceNumber(getCurrentDate())
         }
         try {
-            await addDoc(collection(db, 'sales'), sale)
-            items.value.forEach(async (item) => {
-                const productRef = doc(db, 'products', item.id)
-                await runTransaction(db, async(transaction) => {
-                    const currentProduct = await transaction.get(productRef)
-                    const availability = currentProduct.data().stock - item.quantity
-                    transaction.update(productRef, {stock: availability})
-                })
+            mockDb.addSale(sale)
+            items.value.forEach((item) => {
+                const product = mockDb.getProduct(item.id)
+                if (product) {
+                    const newStock = product.stock - item.quantity
+                    mockDb.updateProduct(item.id, { stock: Math.max(0, newStock) })
+                }
             })
             setTimeout(() => {
                 processingPayment.value = false

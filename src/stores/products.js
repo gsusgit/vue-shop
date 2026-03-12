@@ -1,8 +1,6 @@
 import { computed, onMounted, ref, watch } from 'vue'
 import { defineStore } from 'pinia'
-import { useFirestore, useCollection, useFirebaseStorage, useDocument } from 'vuefire'
-import { collection, addDoc, updateDoc, deleteDoc, doc,getDoc } from 'firebase/firestore'
-import { ref as storageRef, deleteObject } from 'firebase/storage'
+import * as mockDb from '@/data/mockDb.js'
 
 export const useProductsStore = defineStore('products', () => {
 
@@ -12,12 +10,6 @@ export const useProductsStore = defineStore('products', () => {
         {id: 3, name: 'Appareal'}
     ]
 
-    const db = useFirestore()
-
-    const storage = useFirebaseStorage()
-
-    const products = useCollection(collection(db, 'products'))
-
     const categoryFilter = ref('')
 
     const selectedCategory = ref(0)
@@ -25,40 +17,26 @@ export const useProductsStore = defineStore('products', () => {
     const favourites = ref([])
 
     async function createProduct(product) {
-        await addDoc(collection(db, 'products'), product)
+        mockDb.addProduct(product)
     }
 
-    async function updateProduct(docRef, product) {
+    async function updateProduct(id, product) {
         try {
-            await updateDoc(docRef, product)
+            mockDb.updateProduct(id, product)
         } catch (error) {
             console.log(error)
         }
     }
 
     const getProduct = async (id) => {
-        try {
-            const docRef = doc(db, 'products', id)
-            const productSnap = await getDoc(docRef)
-
-            if (productSnap.exists()) {
-                return { ...productSnap.data() }
-            } else {
-                return null
-            }
-        } catch (error) {
-            console.error('Error getting document:', error)
-            return null;
-        }
+        const p = mockDb.getProduct(id)
+        return p ? { ...p } : null
     }
 
-    const removeProduct = async (id, imageUrl) => {
+    const removeProduct = async (id, _imageUrl) => {
         localStorage.removeItem('cartItems')
         localStorage.removeItem('favourites')
-        const imageRef = storageRef(storage, imageUrl)
-        const docRef = doc(db, 'products', id)
-        await deleteDoc(docRef)
-        await deleteObject(imageRef)
+        mockDb.removeProduct(id)
     }
 
     const filterCategories = computed(() => {
@@ -66,6 +44,11 @@ export const useProductsStore = defineStore('products', () => {
             label: category.name,
             value: category.id
         }))
+    })
+
+    const productsCollection = computed(() => {
+        const list = mockDb.products.value
+        return categoryFilter.value ? list.filter(product => product.category) : list
     })
 
     const filteredProducts = computed(() => {
@@ -90,10 +73,6 @@ export const useProductsStore = defineStore('products', () => {
                 value: category.id
             }))
         ]
-    })
-
-    const productsCollection = computed(() => {
-        return categoryFilter.value ? products.value.filter(product => product.category) : products.value
     })
 
     const addToFavourites = (product, id) => {

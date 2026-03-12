@@ -42,13 +42,13 @@ npm run preview
 
 Si vienes a estudiarlo, este orden suele funcionar bien:
 
-1) **Entrada de la app** → `src/main.js`
-2) **Layout global** → `src/App.vue`
-3) **Rutas** → `src/router/index.js`
-4) **Estado y “backend”** → `src/stores/*` + `src/data/mockDb.js`
-5) **Vistas** → `src/views/**`
-6) **Componentes UI** → `src/components/**`
-7) **Composables** → `src/composables/**`
+1. **Entrada de la app** → `src/main.js`
+2. **Layout global** → `src/App.vue`
+3. **Rutas** → `src/router/index.js`
+4. **Estado y “backend”** → `src/stores/*` + `src/data/mockDb.js`
+5. **Vistas** → `src/views/**`
+6. **Componentes UI** → `src/components/**`
+7. **Composables** → `src/composables/**`
 
 ### 1) Punto de entrada: `src/main.js`
 
@@ -186,3 +186,5 @@ Ejemplo “checkout”:
 - **Ejercicio 5 (Nivel: Medio)**: añadir una pantalla “Ventas totales (rango de fechas)” reutilizando store de ventas.
 - **Ejercicio 7 (Nivel: Alto)**: implementar sistema de traducción de la app (i18n) para soportar inglés y español y añadir al menú de navegación.
 - **Ejercicio 8 (Nivel: Alto)**: implementar sistema de autenticación y autorización para el backoffice y añadir al menú de navegación.
+
+actualizado el 12/03/2026

@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
-const colors = require('tailwindcss/colors')
+import colors from 'tailwindcss/colors'
+import tailwindForms from '@tailwindcss/forms'
 
 export default {
   content: [
@@ -20,7 +21,7 @@ export default {
     },
   },
   plugins: [
-      require('@tailwindcss/forms')
+      tailwindForms
   ],
 }
 

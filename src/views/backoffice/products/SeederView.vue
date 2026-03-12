@@ -1,53 +1,24 @@
 <script setup>
-import { ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage'
-import { collection, addDoc } from 'firebase/firestore'
-import { useFirebaseStorage, useFirestore } from 'vuefire'
 import { products } from '@/data/products.js'
+import { seedDemoProducts } from '@/data/mockDb.js'
+import { getDemoImageUrl } from '@/data/demoImages.js'
 import PageTitle from '@/components/layout/base/PageTitle.vue'
 import useToast from '@/composables/useToast.js'
 import { useRouter } from 'vue-router'
 
-const storage = useFirebaseStorage()
-const db = useFirestore();
 const { show } = useToast()
 const router = useRouter()
 
-async function seedDB() {
-  const productsCollection = collection(db, "products");
-
-  for (let i = 0; i < products.length; i++) {
-    const imageName = `product${i + 1}.jpg`;
-    const storageRef = ref(storage, `products/${imageName}`);
-    const uploadTask = uploadBytesResumable(storageRef, await fetchImage(imageName));
-
-    uploadTask.on('state_changed', null, (error) => {
-      console.error("Error uploading image:", error);
-    }, async () => {
-      const url = await getDownloadURL(uploadTask.snapshot.ref);
-      await addDoc(productsCollection, {
-        name: products[i].name,
-        description: products[i].description,
-        price: products[i].price,
-        stock: products[i].stock,
-        category: products[i].category,
-        image: url
-      });
-    });
-  }
+function seedDB() {
+  seedDemoProducts(products, (i) => getDemoImageUrl(i) || `/demo/product${i + 1}.jpg`)
   triggerToast()
 }
 
-const triggerToast = () => {
+function triggerToast() {
   localStorage.removeItem('cartItems')
   localStorage.removeItem('favourites')
   show('Products imported', 'success')
-  router.push({name: 'products'})
-}
-
-async function fetchImage(imageName) {
-  const response = await fetch(`/src/assets/images/demo/${imageName}`);
-  const blob = await response.blob();
-  return blob;
+  router.push({ name: 'products' })
 }
 </script>
 
@@ -74,7 +45,7 @@ async function fetchImage(imageName) {
         </svg>
         <h3 class="text-lg font-medium">Import demo content?</h3>
       </div>
-      <div class="mt-2 mb-4 text-sm">This process will import product images from the demo folder and populate the Firestore database. It's advisable that the database is empty first.
+      <div class="mt-2 mb-4 text-sm">This will import the 12 demo products with images from the demo folder into the local mock database. It's advisable that the database is empty first.
       </div>
     </div>
     <div

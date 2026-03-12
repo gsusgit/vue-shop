@@ -186,5 +186,3 @@ Ejemplo “checkout”:
 - **Ejercicio 5 (Nivel: Medio)**: añadir una pantalla “Ventas totales (rango de fechas)” reutilizando store de ventas.
 - **Ejercicio 7 (Nivel: Alto)**: implementar sistema de traducción de la app (i18n) para soportar inglés y español y añadir al menú de navegación.
 - **Ejercicio 8 (Nivel: Alto)**: implementar sistema de autenticación y autorización para el backoffice y añadir al menú de navegación.
-
-actualizado el 12/03/2026

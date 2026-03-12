@@ -24,6 +24,8 @@ const {
 } = useProductsTable()
 
 const confirmProductsRemoval = () => {
+  localStorage.removeItem('cartItems')
+  localStorage.removeItem('favourites')
   modal.value.show = false
   modal.message = ''
   selectedProducts.value.forEach(product => {

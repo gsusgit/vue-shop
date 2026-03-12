@@ -1,22 +1,17 @@
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
-import { query, collection, where } from 'firebase/firestore'
-import { useFirestore, useCollection } from 'vuefire'
+import * as mockDb from '@/data/mockDb.js'
 
 export const useSales = defineStore('sales', () => {
 
     const date = ref('')
-    const db = useFirestore()
+    const hasDocuments = ref(false)
 
-    const salesSource = computed(() => {
-        if (date.value) {
-           return query(
-                collection(db, 'sales'),
-                where('date', '==', date.value)
-            )}
+    const salesCollection = computed(() => {
+        void mockDb.sales.value
+        if (!date.value) return []
+        return mockDb.getSalesByDate(date.value)
     })
-
-    const salesCollection = useCollection(salesSource)
 
     const isDateSelected = computed(() => date.value)
 
@@ -28,11 +23,27 @@ export const useSales = defineStore('sales', () => {
         return salesCollection.value ? salesCollection.value.reduce((total, sale) => total + sale.total, 0) : 0
     })
 
+    const checkDocuments = async () => {
+        const all = mockDb.getSales()
+        hasDocuments.value = all.length > 0
+    }
+
+    const areDocumentsAvailable = computed(() => hasDocuments.value)
+
+    const removeSales = async () => {
+        localStorage.removeItem('cartItems')
+        localStorage.removeItem('favourites')
+        mockDb.removeAllSales()
+    }
+
     return {
         date,
         isDateSelected,
         salesCollection,
         noSalesForSelectedDate,
-        totalSalesForSelectedDate
+        totalSalesForSelectedDate,
+        areDocumentsAvailable,
+        checkDocuments,
+        removeSales
     }
 })

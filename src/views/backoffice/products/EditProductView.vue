@@ -7,17 +7,9 @@ import { useProductsStore } from '@/stores/products.js'
 import useToast from '@/composables/useToast.js'
 import { CameraIcon } from '@heroicons/vue/24/outline'
 import PageTitle from '@/components/layout/base/PageTitle.vue'
-import { useFirestore, useDocument } from 'vuefire'
-import { doc } from 'firebase/firestore'
 import Spinner from '@/components/layout/shared/Spinner.vue'
 
 const loading = ref(true)
-
-onMounted(() => {
-  setTimeout(() => {
-    loading.value = false
-  }, 1000)
-})
 
 const {
   onFileChange,
@@ -27,24 +19,10 @@ const {
 } = useImage()
 
 const store = useProductsStore()
-
-const { show } = useToast()
-
-const route = useRoute()
-const db = useFirestore()
-const docRef = doc(db, 'products', route.params.id)
-const product = useDocument(docRef)
-
-watch(product, (product) => {
-  if (product) {
-    Object.assign(formData, product)
-    imageUrl.value = product.image
-  } else {
-    router.push({ name: 'products' })
-  }
-})
-
 const products = useProductsStore()
+const { show } = useToast()
+const route = useRoute()
+const router = useRouter()
 const fileInputRef = ref(null)
 const formData = reactive({
   name: '',
@@ -53,7 +31,27 @@ const formData = reactive({
   price: '',
   stock: '',
 })
-const router = useRouter()
+
+async function loadProduct(id) {
+  loading.value = true
+  const data = await store.getProduct(id)
+  if (data) {
+    Object.assign(formData, data)
+    imageUrl.value = data.image ?? ''
+  } else {
+    router.push({ name: 'products' })
+    return
+  }
+  loading.value = false
+}
+
+onMounted(() => {
+  loadProduct(route.params.id)
+})
+
+watch(() => route.params.id, (id) => {
+  if (id) loadProduct(id)
+})
 
 const handleImageClick = () => {
   if (fileInputRef.value) {
@@ -61,18 +59,18 @@ const handleImageClick = () => {
   }
 }
 
-const submitHandler = async data => {
+const submitHandler = async (data) => {
   const product = {
     ...data,
     image: imageUrl.value
   }
-  await store.updateProduct(docRef, product)
+  await store.updateProduct(route.params.id, product)
   triggerToast()
 }
 
 const triggerToast = () => {
   show('Product updated', 'success')
-  router.push({name: 'products'})
+  router.push({ name: 'products' })
 }
 </script>
 
@@ -200,7 +198,7 @@ const triggerToast = () => {
                   name="image"
                   ref="fileInputRef"
                   class="absolute inset-0 opacity-0 cursor-pointer"
-                  accept=".jpg"
+                  accept=".jpg,.jpeg,.png,.webp"
                   @change="onFileChange($event)"
               />
             </div>

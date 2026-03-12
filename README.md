@@ -177,7 +177,7 @@ Ejemplo “checkout”:
 - Actualiza stock de productos en `mockDb`
 - Resetea carrito y cupón
 
-## Propuestas de ejercicios (para tu compañera)
+## Propuestas de ejercicios
 
 - **Ejercicio 1**: añadir una nueva categoría y que el filtro la soporte (store `products` + UI).
 - **Ejercicio 2**: persistir también `selectedCategory` en `localStorage`.

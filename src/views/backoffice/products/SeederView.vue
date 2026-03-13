@@ -6,18 +6,13 @@ import PageTitle from '@/components/layout/base/PageTitle.vue'
 import useToast from '@/composables/useToast.js'
 import { useRouter } from 'vue-router'
 
-const { show } = useToast()
 const router = useRouter()
 
 function seedDB() {
   seedDemoProducts(products, (i) => getDemoImageUrl(i) || `/demo/product${i + 1}.jpg`)
-  triggerToast()
-}
-
-function triggerToast() {
   localStorage.removeItem('cartItems')
   localStorage.removeItem('favourites')
-  show('Products imported', 'success')
+  localStorage.setItem('demoImported', '1')
   router.push({ name: 'products' })
 }
 </script>

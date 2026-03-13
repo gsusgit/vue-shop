@@ -5,8 +5,10 @@ import PageTitle from '@/components/layout/base/PageTitle.vue'
 import ProductList from '@/components/ui/backoffice/ProductList.vue'
 import Notification from '@/components/layout/shared/Notification.vue'
 import Spinner from '@/components/layout/shared/Spinner.vue'
+import useToast from '@/composables/useToast.js'
 
 const products = useProductsStore()
+const { show } = useToast()
 
 const notification = {
   title: 'Store is empty',
@@ -26,6 +28,10 @@ const loading = ref(true)
 onMounted(() => {
   setTimeout(() => {
     loading.value = false
+    if (localStorage.getItem('demoImported') === '1' && products.productsCollection.length > 0) {
+      show('Products imported', 'success')
+      localStorage.removeItem('demoImported')
+    }
   }, 1500)
 })
 </script>

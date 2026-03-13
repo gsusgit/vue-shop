@@ -75,11 +75,11 @@ Las rutas están separadas por intención:
 
 - **Tienda**: `/`, `/product/:id`, `/cart`, `/favourites`
 - **Backoffice**: `/backoffice` con **rutas hijas**:
-  - `/backoffice/products`
-  - `/backoffice/new-product`
-  - `/backoffice/edit-product/:id`
-  - `/backoffice/import-demo` (carga datos de ejemplo)
-  - `/backoffice/sales`
+    - `/backoffice/products`
+    - `/backoffice/new-product`
+    - `/backoffice/edit-product/:id`
+    - `/backoffice/import-demo` (carga datos de ejemplo)
+    - `/backoffice/sales`
 
 Además se usa **lazy-loading** (imports dinámicos) en varias rutas para practicar división de código.
 
@@ -89,7 +89,7 @@ Este proyecto no depende de un backend real. En su lugar hay un módulo que hace
 
 - Guarda **productos** y **ventas** en memoria (con `ref`)
 - Persiste automáticamente en `localStorage` (clave `vue-shop-mock`)
-- Expone funciones de acceso a datos (DAO = *Data Access Object*: patrón que encapsula el acceso a la “base de datos”): `addProduct`, `updateProduct`, `getSalesByDate`, etc.
+- Expone funciones de acceso a datos (DAO = _Data Access Object_: patrón que encapsula el acceso a la “base de datos”): `addProduct`, `updateProduct`, `getSalesByDate`, etc.
 
 Esto es útil formativamente porque te permite practicar arquitectura y estado sin montar APIs.
 
@@ -98,19 +98,19 @@ Esto es útil formativamente porque te permite practicar arquitectura y estado s
 Este repo usa **stores de Pinia en modo setup** (función que devuelve estado/acciones).
 
 - `src/stores/products.js`
-  - **Filtrado** por categorías (`selectedCategory`)
-  - **Favoritos** persistidos en `localStorage`
-  - Operaciones CRUD delegando a `mockDb`
+    - **Filtrado** por categorías (`selectedCategory`)
+    - **Favoritos** persistidos en `localStorage`
+    - Operaciones CRUD delegando a `mockDb`
 - `src/stores/cart.js`
-  - Carrito con `items`, cálculo de `subtotal/taxes/total` usando `watchEffect`
-  - Checkout que genera una venta y descuenta stock en `mockDb`
-  - Persistencia del carrito en `localStorage`
+    - Carrito con `items`, cálculo de `subtotal/taxes/total` usando `watchEffect`
+    - Checkout que genera una venta y descuenta stock en `mockDb`
+    - Persistencia del carrito en `localStorage`
 - `src/stores/voucher.js`
-  - Cupones válidos, estado de “aplicando descuento” y recalcular descuentos
-  - Ejemplo de store que **depende de otra store** (`useCart`)
+    - Cupones válidos, estado de “aplicando descuento” y recalcular descuentos
+    - Ejemplo de store que **depende de otra store** (`useCart`)
 - `src/stores/sales.js`
-  - Selección de fecha, ventas del día, total del día
-  - Borrado global de ventas (útil para reiniciar práctica)
+    - Selección de fecha, ventas del día, total del día
+    - Borrado global de ventas (útil para reiniciar práctica)
 
 Idea clave: aquí se ve cómo mezclar **estado reactivo + computed + watchers** dentro de una store, y cómo guardar una parte del estado en `localStorage`.
 
@@ -207,4 +207,4 @@ Ejemplo “checkout”:
   Comentario: implica reorganizar textos, pensar en claves de traducción y comprender cómo integrar un plugin global.
 
 - **Ejercicio 10 (Nivel: Alto)**: implementar sistema de autenticación y autorización para el backoffice y añadir al menú de navegación.  
-  Comentario: toca conceptos de roles, protección de rutas y manejo de sesión (aunque sea simulado en el front).
+  Comentario: toca conceptos de roles, protección de rutas y manejo de sesión (aunque sea simulado en el front). Practicaremos también el uso de distintos layouts para la parte pública y privada.

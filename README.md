@@ -89,7 +89,7 @@ Este proyecto no depende de un backend real. En su lugar hay un módulo que hace
 
 - Guarda **productos** y **ventas** en memoria (con `ref`)
 - Persiste automáticamente en `localStorage` (clave `vue-shop-mock`)
-- Expone funciones tipo DAO: `addProduct`, `updateProduct`, `getSalesByDate`, etc.
+- Expone funciones de acceso a datos (DAO = *Data Access Object*: patrón que encapsula el acceso a la “base de datos”): `addProduct`, `updateProduct`, `getSalesByDate`, etc.
 
 Esto es útil formativamente porque te permite practicar arquitectura y estado sin montar APIs.
 
@@ -179,10 +179,32 @@ Ejemplo “checkout”:
 
 ## Propuestas de ejercicios
 
-- **Ejercicio 1 (Nivel: Fácil)**: añadir una nueva categoría y que el filtro la soporte (store `products` + UI).
-- **Ejercicio 2 (Nivel: Fácil)**: persistir también `selectedCategory` en `localStorage`.
-- **Ejercicio 3 (Nivel: Medio)**: crear un composable `useLocalStorageRef(key, defaultValue)` y refactorizar carrito/favoritos.
-- **Ejercicio 4 (Nivel: Medio)**: mejorar `mockDb` para soportar “búsqueda por texto” (nombre/descripción) y usarlo en la tienda.
-- **Ejercicio 5 (Nivel: Medio)**: añadir una pantalla “Ventas totales (rango de fechas)” reutilizando store de ventas.
-- **Ejercicio 7 (Nivel: Alto)**: implementar sistema de traducción de la app (i18n) para soportar inglés y español y añadir al menú de navegación.
-- **Ejercicio 8 (Nivel: Alto)**: implementar sistema de autenticación y autorización para el backoffice y añadir al menú de navegación.
+- **Ejercicio 1 (Nivel: Fácil)**: añadir una nueva categoría y que el filtro la soporte (store `products` + UI).  
+  Comentario: ideal para practicar filtros reactivos, estado global sencillo y cómo conectar un filtro de UI con una store.
+
+- **Ejercicio 2 (Nivel: Fácil)**: persistir también `selectedCategory` en `localStorage`.  
+  Comentario: refuerza el patrón de persistencia en `localStorage` y cómo rehidratar estado al arrancar la app.
+
+- **Ejercicio 3 (Nivel: Medio)**: crear un composable `useLocalStorageRef(key, defaultValue)` y refactorizar carrito/favoritos.  
+  Comentario: te obliga a encapsular lógica repetida en un composable reutilizable (DRY) y pensar en APIs limpias.
+
+- **Ejercicio 4 (Nivel: Medio)**: mejorar `mockDb` para soportar “búsqueda por texto” (nombre/descripción) y usarlo en la tienda.  
+  Comentario: combina filtrado de datos, pequeño “DAO” en memoria y componentes controlados por inputs de búsqueda.
+
+- **Ejercicio 5 (Nivel: Medio)**: añadir una pantalla “Ventas totales (rango de fechas)” reutilizando store de ventas.  
+  Comentario: buen ejercicio de reutilización de stores, computeds y diseño de una vista más “de reporting”.
+
+- **Ejercicio 6 (Nivel: Medio)**: cuando se añada un producto al carrito, mostrar un modal con el resumen del carrito y dos acciones: “Proceder al pago” (navega a la vista de carrito/checkout) y “Seguir comprando” (cierra el modal).  
+  Comentario: trabajas con comunicación entre componentes, uso de modales reutilizables y navegación programática con Vue Router.
+
+- **Ejercicio 7 (Nivel: Medio/Alto)**: ampliar el flujo de pago creando una vista de “pasarela de pago” a pantalla completa con nombre de banco inventado y formulario de tarjeta de crédito (validar 16 dígitos, fecha de expiración mm/yy posterior a la actual y CVV de 3 dígitos).  
+  Comentario: mezcla rutas nuevas, formularios y validación más avanzada (regex/validadores custom) sobre FormKit.
+
+- **Ejercicio 8 (Nivel: Medio/Alto)**: añadir un perfil de cliente accesible desde un icono de usuario en el menú superior que muestre pedidos del cliente y, si quieres, otros datos de perfil. De paso, adapta el menú para quitar o reubicar la opción de favoritos actual.  
+  Comentario: buen escenario para practicar rutas adicionales de la parte pública, vistas de perfil y diseño de navegación.
+
+- **Ejercicio 9 (Nivel: Alto)**: implementar sistema de traducción de la app (i18n) para soportar inglés y español y añadir al menú de navegación.  
+  Comentario: implica reorganizar textos, pensar en claves de traducción y comprender cómo integrar un plugin global.
+
+- **Ejercicio 10 (Nivel: Alto)**: implementar sistema de autenticación y autorización para el backoffice y añadir al menú de navegación.  
+  Comentario: toca conceptos de roles, protección de rutas y manejo de sesión (aunque sea simulado en el front).

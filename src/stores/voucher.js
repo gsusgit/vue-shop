@@ -1,6 +1,7 @@
 import { ref, watch, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { useCart } from './cart'
+import { i18n } from '@/i18n'
 
 export const useCouponStore = defineStore('coupon', () => {
 
@@ -39,7 +40,7 @@ export const useCouponStore = defineStore('coupon', () => {
             setTimeout(() => {
                 showError.value = true
                 applyingDiscount.value = false
-                discountDescription.value = 'Coupon not valid'
+                discountDescription.value = i18n.global.t('cart.couponInvalid')
             }, 3000)
         }
     }

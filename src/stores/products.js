@@ -1,20 +1,25 @@
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
+import useLocalStorageRef from '@/composables/useLocalStorageRef.js'
 import * as mockDb from '@/data/mockDb.js'
+import { i18n } from '@/i18n'
 
 export const useProductsStore = defineStore('products', () => {
 
     const categories = [
-        {id: 1, name: 'Sneakers'},
-        {id: 2, name: 'Clothing'},
-        {id: 3, name: 'Appareal'}
+        { id: 1, labelKey: 'products.categorySneakers' },
+        { id: 2, labelKey: 'products.categoryClothing' },
+        { id: 3, labelKey: 'products.categoryApparel' }
     ]
 
-    const categoryFilter = ref('')
+    const searchQuery = ref('')
 
-    const selectedCategory = ref(0)
+    const selectedCategory = useLocalStorageRef('selectedCategory', 0)
+    if (!categories.some(category => category.id === selectedCategory.value) && selectedCategory.value !== 0) {
+        selectedCategory.value = 0
+    }
 
-    const favourites = ref([])
+    const favourites = useLocalStorageRef('favourites', [])
 
     async function createProduct(product) {
         mockDb.addProduct(product)
@@ -41,35 +46,34 @@ export const useProductsStore = defineStore('products', () => {
 
     const filterCategories = computed(() => {
         return categories.map(category => ({
-            label: category.name,
+            label: i18n.global.t(category.labelKey),
             value: category.id
         }))
     })
 
-    const productsCollection = computed(() => {
-        const list = mockDb.products.value
-        return categoryFilter.value ? list.filter(product => product.category) : list
-    })
+    const productsCollection = computed(() => mockDb.getProducts())
+
+    const searchedProducts = computed(() => mockDb.searchProducts(searchQuery.value))
 
     const filteredProducts = computed(() => {
         if (selectedCategory.value === 0) {
-            return productsCollection.value
-        } else {
-            return productsCollection.value.filter(product => product.category === selectedCategory.value)
+            return searchedProducts.value
         }
+
+        return searchedProducts.value.filter(product => product.category === selectedCategory.value)
     })
 
     const categoryOptions = computed(() => {
         return [
             {
-                label: 'Select category',
+                label: i18n.global.t('common.selectCategory'),
                 value: '',
                 attrs: {
                     disabled: true,
                 }
             },
             ...categories.map(category => ({
-                label: category.name,
+                label: i18n.global.t(category.labelKey),
                 value: category.id
             }))
         ]
@@ -83,16 +87,6 @@ export const useProductsStore = defineStore('products', () => {
         favourites.value = favourites.value.filter(favourite => favourite.id !== product.id)
     }
 
-    watch(favourites, (newItems) => {
-        localStorage.setItem('favourites', JSON.stringify(newItems))
-    }, { deep: true })
-
-    onMounted(() => {
-        const savedItems = localStorage.getItem('favourites')
-        if (savedItems) {
-            favourites.value = JSON.parse(savedItems)
-        }
-    })
 
     const isFavourite = (product) => {
         return favourites.value.some(item => item.id === product.id)
@@ -115,6 +109,7 @@ export const useProductsStore = defineStore('products', () => {
         filterCategories,
         categoryOptions,
         productsCollection,
+        searchQuery,
         selectedCategory,
         favourites
     }

@@ -1,12 +1,14 @@
 import { defineStore } from 'pinia'
-import { computed, onMounted, ref, watch, watchEffect } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
+import useLocalStorageRef from '@/composables/useLocalStorageRef.js'
 import useToast from '@/composables/useToast.js'
 import { useCouponStore } from '@/stores/voucher.js'
 import { getCurrentDate } from '@/lib/helpers.js'
 import * as mockDb from '@/data/mockDb.js'
+import { i18n } from '@/i18n'
 
 export const useCart = defineStore('cart', () => {
-    const items = ref([])
+    const items = useLocalStorageRef('cartItems', [])
     const subtotal = ref(0)
     const taxes = ref(0)
     const total = ref(0)
@@ -23,28 +25,25 @@ export const useCart = defineStore('cart', () => {
         total.value = Number(((subtotal.value + taxes.value) - coupon.discount).toFixed(2))
     })
 
-    watch(items, (newItems) => {
-        localStorage.setItem('cartItems', JSON.stringify(newItems))
-    }, { deep: true })
-
-    onMounted(() => {
-        const savedItems = localStorage.getItem('cartItems')
-        if (savedItems) {
-            items.value = JSON.parse(savedItems)
-        }
-    })
 
     function addItem(item) {
+        if (!item || item.stock <= 0) {
+            show(i18n.global.t('cart.outOfStock'), 'error')
+            return false
+        }
+
         const index = isItemInCart(item.id)
         if(index >= 0) {
             if(isProductAvailable(item, index)) {
-                show('Maximum items reached', 'error')
-                return
+                show(i18n.global.t('cart.maximumReached'), 'error')
+                return false
             }
             items.value[index].quantity++
         } else {
             items.value.push({...item, quantity: 1, id: item.id})
         }
+
+        return true
     }
 
     const isItemInCart = id => {
@@ -77,39 +76,53 @@ export const useCart = defineStore('cart', () => {
         return dateStr.split('/').join('') + '-' + (salesCount + 1)
     }
 
-    async function checkOut() {
-        processingPayment.value = true
-        const sale = {
-            items: items.value.map(item => ({
-                id: item.id,
-                name: item.name,
-                price: item.price,
-                quantity: item.quantity,
-                image: item.image
-            })),
-            subtotal: subtotal.value,
-            taxes: taxes.value,
-            discount: coupon.discount,
-            total: total.value,
-            date : getCurrentDate(),
-            invoice : await generateInvoiceNumber(getCurrentDate())
+    async function completeCheckout() {
+        if (items.value.length === 0) {
+            throw new Error(i18n.global.t('cart.emptyCheckout'))
         }
+
+        const unavailableItem = items.value.find(item => {
+            const product = mockDb.getProduct(item.id)
+            return !product || product.stock < item.quantity
+        })
+
+        if (unavailableItem) {
+            throw new Error(i18n.global.t('cart.insufficientStock', { name: unavailableItem.name }))
+        }
+
+        processingPayment.value = true
+
         try {
+            await new Promise(resolve => setTimeout(resolve, 1500))
+
+            const date = getCurrentDate()
+            const sale = {
+                items: items.value.map(item => ({
+                    id: item.id,
+                    name: item.name,
+                    price: item.price,
+                    quantity: item.quantity,
+                    image: item.image
+                })),
+                subtotal: subtotal.value,
+                taxes: taxes.value,
+                discount: coupon.discount,
+                total: total.value,
+                date,
+                invoice: await generateInvoiceNumber(date)
+            }
+
             mockDb.addSale(sale)
-            items.value.forEach((item) => {
+            items.value.forEach(item => {
                 const product = mockDb.getProduct(item.id)
-                if (product) {
-                    const newStock = product.stock - item.quantity
-                    mockDb.updateProduct(item.id, { stock: Math.max(0, newStock) })
-                }
+                mockDb.updateProduct(item.id, { stock: product.stock - item.quantity })
             })
-            setTimeout(() => {
-                processingPayment.value = false
-                $reset()
-                coupon.$reset()
-            }, 3000)
-        } catch (error) {
-            console.log(error)
+
+            $reset()
+            coupon.$reset()
+            return sale
+        } finally {
+            processingPayment.value = false
         }
     }
 
@@ -124,7 +137,7 @@ export const useCart = defineStore('cart', () => {
         addItem,
         updateQuantity,
         removeItem,
-        checkOut,
+        completeCheckout,
         $reset,
         items,
         isEmpty,

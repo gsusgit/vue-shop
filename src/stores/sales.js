@@ -4,23 +4,25 @@ import * as mockDb from '@/data/mockDb.js'
 
 export const useSales = defineStore('sales', () => {
 
-    const date = ref('')
+    const dateRange = ref([])
     const hasDocuments = ref(false)
 
-    const salesCollection = computed(() => {
+    const isDateRangeSelected = computed(() => {
+        return Array.isArray(dateRange.value) && dateRange.value.length === 2 && dateRange.value.every(Boolean)
+    })
+
+    const salesForDateRange = computed(() => {
         void mockDb.sales.value
-        if (!date.value) return []
-        return mockDb.getSalesByDate(date.value)
+        if (!isDateRangeSelected.value) return []
+        return mockDb.getSalesByDateRange(dateRange.value[0], dateRange.value[1])
     })
 
-    const isDateSelected = computed(() => date.value)
-
-    const noSalesForSelectedDate = computed(() => {
-        return date.value && salesCollection.value.length === 0
+    const noSalesForSelectedDateRange = computed(() => {
+        return isDateRangeSelected.value && salesForDateRange.value.length === 0
     })
 
-    const totalSalesForSelectedDate = computed(() => {
-        return salesCollection.value ? salesCollection.value.reduce((total, sale) => total + sale.total, 0) : 0
+    const totalSalesForDateRange = computed(() => {
+        return salesForDateRange.value.reduce((total, sale) => total + Number(sale.total), 0)
     })
 
     const checkDocuments = async () => {
@@ -37,11 +39,11 @@ export const useSales = defineStore('sales', () => {
     }
 
     return {
-        date,
-        isDateSelected,
-        salesCollection,
-        noSalesForSelectedDate,
-        totalSalesForSelectedDate,
+        dateRange,
+        isDateRangeSelected,
+        salesForDateRange,
+        noSalesForSelectedDateRange,
+        totalSalesForDateRange,
         areDocumentsAvailable,
         checkDocuments,
         removeSales

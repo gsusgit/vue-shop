@@ -44,6 +44,19 @@ export function getProduct(id) {
   return products.value.find(p => p.id === id) ?? null
 }
 
+export function searchProducts(query) {
+  const normalizedQuery = String(query ?? '').trim().toLowerCase()
+
+  if (!normalizedQuery) return products.value
+
+  return products.value.filter(product => {
+    const name = String(product.name ?? '').toLowerCase()
+    const description = String(product.description ?? '').toLowerCase()
+
+    return name.includes(normalizedQuery) || description.includes(normalizedQuery)
+  })
+}
+
 export function addProduct(product) {
   const id = product.id ?? uid()
   const entry = { ...product, id }
@@ -68,6 +81,36 @@ export function getSales() {
 export function getSalesByDate(date) {
   if (!date) return []
   return sales.value.filter(s => s.date === date)
+}
+
+function getDateValue(date) {
+  const match = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(date)
+  if (!match) return null
+
+  const [, day, month, year] = match.map(Number)
+  const value = new Date(year, month - 1, day)
+
+  if (
+    value.getFullYear() !== year ||
+    value.getMonth() !== month - 1 ||
+    value.getDate() !== day
+  ) {
+    return null
+  }
+
+  return value.getTime()
+}
+
+export function getSalesByDateRange(startDate, endDate) {
+  const start = getDateValue(startDate)
+  const end = getDateValue(endDate)
+
+  if (start === null || end === null) return []
+
+  return sales.value.filter(sale => {
+    const saleDate = getDateValue(sale.date)
+    return saleDate !== null && saleDate >= start && saleDate <= end
+  })
 }
 
 export function addSale(sale) {

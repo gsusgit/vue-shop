@@ -21,6 +21,12 @@ const router = createRouter({
       component: () => import('../views/shop/CartView.vue'),
     },
     {
+      path: '/checkout',
+      name: 'checkout',
+      component: () => import('../views/shop/PaymentGatewayView.vue'),
+      meta: { fullScreen: true }
+    },
+    {
       path: '/favourites',
       name: 'favourites',
       component: () => import('../views/shop/FavouritesView.vue'),
@@ -44,6 +50,7 @@ const router = createRouter({
           name: 'sales',
           component: () => import('../views/backoffice/sales/SalesView.vue')
         },
+
         {
           path: '/backoffice/new-product',
           name: 'new-product',

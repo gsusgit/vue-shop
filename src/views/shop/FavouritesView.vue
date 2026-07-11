@@ -4,18 +4,15 @@ import { useProductsStore } from '@/stores/products.js'
 import Notification from '@/components/layout/shared/Notification.vue'
 import { onMounted, ref } from 'vue'
 import Spinner from '@/components/layout/shared/Spinner.vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const notification = {
-  title: 'Oops, nothing here...',
-  message: 'Your favorites list is currently empty! Explore our products and add your preferred items here to keep them handy.',
-  button1: {
-    text: 'Go to the home page',
-    route: 'home'
-  },
-  button2: {
-    text: '',
-    route: ''
-  }
+  title: t('shop.wishlistEmptyTitle'),
+  message: t('shop.wishlistEmptyMessage'),
+  button1: { text: t('shop.goHome'), route: 'home' },
+  button2: { text: '', route: '' }
 }
 
 const products = useProductsStore()
@@ -39,13 +36,13 @@ const toggleFavourite = (product) => {
 
 <template>
   <div v-if="!loading">
-    <h1 class="mb-4 mt-5 text-xl font-semibold leading-none tracking-tight text-gray-900">Your Wishlist</h1>
+    <h1 class="mb-4 mt-5 text-xl font-semibold leading-none tracking-tight text-gray-900">{{ t('shop.wishlist') }}</h1>
     <div v-if="products.favourites.length > 0">
-      <p>Here you can see all the products you've added to your favorites list. Browse through and quickly find your favorite items!</p>
+      <p>{{ t('shop.wishlistHelp') }}</p>
       <div
           class="mt-5 grid grid-cols-1 gap-4">
         <div class="col-span-2">
-          <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
+          <div class="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
             <Product
                 v-for="product in products.favourites"
                 :key="product.id"

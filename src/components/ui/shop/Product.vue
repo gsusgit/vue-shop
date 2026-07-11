@@ -5,8 +5,9 @@ import Dialog from '@/components/layout/shared/Dialog.vue'
 import { useCart } from '@/stores/cart.js'
 import { defineEmits } from 'vue'
 import { useProductsStore } from '@/stores/products.js'
+import { useI18n } from 'vue-i18n'
 
-const emit = defineEmits()
+const emit = defineEmits(['toggle-favourite', 'added-to-cart'])
 
 const props = defineProps({
   product: {
@@ -28,6 +29,7 @@ const openDialog = () => {
 const cart = useCart()
 const products = useProductsStore()
 
+const { t } = useI18n()
 const isFavorite = ref(false)
 
 onMounted(() => {
@@ -41,6 +43,12 @@ watch(() => products.favourites, () => {
 const toggleFavorite = () => {
   isFavorite.value = !isFavorite.value
   emit('toggle-favourite', props.product)
+}
+
+const addToCart = () => {
+  if (cart.addItem(props.product)) {
+    emit('added-to-cart', props.product)
+  }
 }
 </script>
 
@@ -87,7 +95,7 @@ const toggleFavorite = () => {
       <img
           class="p-2 rounded-t-lg"
           :src="product.image"
-          alt="product image"/>
+          :alt="t('shop.productImageAlt')"
     </RouterLink>
     <div
         class="px-3 pb-5 flex flex-col flex-grow">
@@ -98,18 +106,14 @@ const toggleFavorite = () => {
             product.name
           }}</h5>
       </a>
-      <div
-          class="flex items-center justify-between mt-4">
-        <span
-            class="text-sm font-bold text-gray-900">{{ formatCurrency(product.price) }}</span>
+      <div class="mt-4">
+        <span class="text-sm font-bold text-gray-900">{{ formatCurrency(product.price) }}</span>
         <button
-            class="bg-teal-600 text-white hover:bg-teal-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-xs px-2 py-1 text-center disabled:bg-neutral-200 disabled:text-neutral-400"
+            class="mt-2 w-full rounded-lg bg-teal-600 px-2 py-2 text-center text-xs font-medium text-white hover:bg-teal-700 focus:outline-none focus:ring-4 focus:ring-gray-300 disabled:bg-neutral-200 disabled:text-neutral-400"
             :disabled="product.stock === 0"
-            @click="cart.addItem(product)"
+            @click="addToCart"
         >
-          Add
-          to
-          cart
+          {{ t('common.add') }}
         </button>
       </div>
       <div
@@ -119,7 +123,7 @@ const toggleFavorite = () => {
               :class="[cart.checkProductAvailability(product) === 0 ? 'bg-red-50 text-red-800 border border-red-100' : 'bg-teal-50 border border-teal-100 text-teal-800']"
               class="px-2 py-1 rounded-xl shadow-2xl text-xs font-medium">
                   {{
-              cart.checkProductAvailability(product) === 0 ? 'Out of stock' : cart.checkProductAvailability(product) + ' in stock'
+              cart.checkProductAvailability(product) === 0 ? t('shop.outOfStock') : t('shop.inStock', { count: cart.checkProductAvailability(product) })
             }}
                 </span>
         </p>

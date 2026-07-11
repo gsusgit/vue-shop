@@ -1,4 +1,7 @@
 <script setup>
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 const props = defineProps({
   modal: {
     type: Object,
@@ -54,7 +57,7 @@ const handleConfirm = () => {
               v-if="modal.image">
             <img
                 :src="modal.image"
-                alt="Product image in full size"
+                :alt="t('shop.productImageAlt')"
                 class="mx-auto mb-4 w-full rounded-lg"/>
           </div>
           <div
@@ -74,9 +77,7 @@ const handleConfirm = () => {
               py-2.5 text-center"
                 @click="handleConfirm"
             >
-              Yes,
-              I'm
-              sure
+              {{ t('common.confirm') }}
             </button>
             <button
                 type="button"
@@ -86,8 +87,7 @@ const handleConfirm = () => {
               focus:ring-gray-100"
                 @click="closeModal"
             >
-              No,
-              cancel
+              {{ t('common.cancel') }}
             </button>
           </div>
         </div>

@@ -2,6 +2,9 @@
     setup
     xmlns="http://www.w3.org/1999/html">
 import { formatCurrency } from '@/lib/helpers.js'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 defineProps({
   item: {
@@ -13,24 +16,16 @@ defineProps({
 
 <template>
 <!--  hacer que el ultimo li no tenga border bottom-->
-  <li class="flex items-center justify-between py-4">
-    <div class="flex items-center space-x-6">
-      <img
-          :src="item.image"
-          class="h-12 w-12 flex-none border-lg border-gray-100 border-1 rounded-lg"
-          :alt="item.name" />
-      <div class="flex-auto">
-        <p class="font-semibold text-sm" style="min-width: 350px;">{{ item.name }}</p>
+  <li class="py-4">
+    <div class="flex gap-3 sm:items-center sm:justify-between">
+      <div class="flex min-w-0 flex-1 items-center gap-3">
+        <img :src="item.image" class="h-12 w-12 shrink-0 rounded-lg border border-gray-100 object-cover" :alt="item.name" />
+        <div class="min-w-0">
+          <p class="truncate text-sm font-semibold text-gray-900">{{ item.name }}</p>
+          <p class="mt-1 text-xs text-gray-600">{{ t('common.quantity') }}: {{ item.quantity }} · {{ t('common.price') }}: {{ formatCurrency(item.price) }}</p>
+        </div>
       </div>
-      <div class="flex-auto">
-        <p class="text-sm">Qty: {{ item.quantity }}</p>
-      </div>
-      <div class="flex-auto">
-        <p class="text-sm">Price: {{ formatCurrency(item.price) }}</p>
-      </div>
-    </div>
-    <div class="flex-none">
-      <p class="text-sm">Total: <span class="font-semibold">{{ formatCurrency(item.price * item.quantity) }}</span></p>
+      <p class="shrink-0 text-right text-sm">{{ t('common.total') }}: <span class="font-semibold">{{ formatCurrency(item.price * item.quantity) }}</span></p>
     </div>
   </li>
 </template>

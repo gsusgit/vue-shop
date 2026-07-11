@@ -1,7 +1,10 @@
 <script setup>
+
+import { useI18n } from 'vue-i18n'
 import { useProductsStore } from '@/stores/products.js'
 
 const products = useProductsStore()
+const { t } = useI18n()
 
 const isSelected = (categoryValue) => {
   return products.selectedCategory === categoryValue
@@ -17,6 +20,7 @@ const selectCategory = (category) => {
 </script>
 
 <template>
+
   <div class="flex items-center justify-center flex-wrap">
     <button
         type="button"
@@ -26,7 +30,7 @@ const selectCategory = (category) => {
         ]"
         @click="selectCategory('')"
     >
-      All categories
+      {{ t('shop.allCategories') }}
     </button>
     <button
         v-for="category in products.filterCategories"

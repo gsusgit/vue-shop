@@ -1,11 +1,16 @@
 <script setup>
 import NavItem from './NavItem.vue'
 import { useRoute } from 'vue-router'
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { setLocale } from '@/i18n'
 import { useCart } from '@/stores/cart.js'
 import { useProductsStore } from '@/stores/products.js'
 
 const route = useRoute()
+const { locale, t } = useI18n({ useScope: 'global' })
+
+const changeLocale = event => setLocale(event.target.value)
 
 const isAdminRoute = computed(() => route.path.startsWith('/backoffice'))
 
@@ -35,13 +40,24 @@ const products = useProductsStore()
         </span>
       </div>
     </NavItem>
-    <NavItem to="sales" type="button">Admin Panel</NavItem>
+    <NavItem to="sales" type="button">{{ t('navigation.admin') }}</NavItem>
   </div>
   <div v-else class="hidden w-full md:block md:w-auto" id="navbar-multi-level">
     <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 rtl:space-x-reverse md:flex-row md:mt-0">
-      <NavItem to="sales" type="link">Sales</NavItem>
-      <NavItem to="products" type="link">Products</NavItem>
-      <NavItem to="home" type="button">Go to shop</NavItem>
+      <NavItem to="sales" type="link">{{ t('navigation.sales') }}</NavItem>
+      <NavItem to="products" type="link">{{ t('navigation.products') }}</NavItem>
+      <NavItem to="home" type="button">{{ t('navigation.shop') }}</NavItem>
     </ul>
   </div>
+  <label class="ml-2 inline-flex items-center text-sm text-gray-700">
+    <span class="sr-only">{{ t('navigation.language') }}</span>
+    <select
+        :value="locale"
+        class="rounded-md border border-gray-300 bg-white px-2 py-1 text-sm focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-200"
+        @change="changeLocale"
+    >
+      <option value="en">EN</option>
+      <option value="es">ES</option>
+    </select>
+  </label>
 </template>

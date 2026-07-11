@@ -8,10 +8,13 @@ import { useProductsStore } from '@/stores/products.js'
 import RelatedProduct from '@/components/ui/shop/RelatedProduct.vue'
 import Spinner from '@/components/layout/shared/Spinner.vue'
 import useToast from '@/composables/useToast.js'
+import CartSummaryModal from '@/components/ui/shop/CartSummaryModal.vue'
+import { useI18n } from 'vue-i18n'
 
 const route = useRoute()
 const router = useRouter()
 const { show } = useToast()
+const { t } = useI18n()
 const products = useProductsStore()
 const product = ref({})
 const cart = useCart()
@@ -21,6 +24,7 @@ const dialog = ref({
 })
 const relatedProducts = ref([])
 const loading = ref(true)
+const cartSummaryOpen = ref(false)
 
 onMounted(() => {
   getProductData(route.params.id)
@@ -41,7 +45,7 @@ const getProductData = async (id) => {
         relatedProducts.value = products.relatedProducts(id)
       })
       .catch(() => {
-        show('Product not found', 'error')
+        show(t('shop.productNotFound'), 'error')
         router.push({name: 'home'})
       })
   setTimeout(() => {
@@ -62,12 +66,22 @@ const toggleFavorite = () => {
   }
 }
 
+const addToCart = () => {
+  if (cart.addItem(product.value)) {
+    cartSummaryOpen.value = true
+  }
+}
+
 </script>
 
 <template>
   <div v-if="!loading">
     <Dialog
         :modal="dialog"/>
+    <CartSummaryModal
+        :show="cartSummaryOpen"
+        @close="cartSummaryOpen = false"
+    />
     <div class="mt-10">
       <div class="w-full mx-auto">
         <div class="flex flex-col md:flex-row -mx-4">
@@ -76,7 +90,7 @@ const toggleFavorite = () => {
                 class="object-cover hover:cursor-zoom-in"
                 width="400"
                 :src="product?.image"
-                alt="Product Image"
+                :alt="t('shop.productImageAlt')"
                 @click="openDialog"
             />
           </div>
@@ -97,7 +111,7 @@ const toggleFavorite = () => {
                       :class="[cart.checkProductAvailability(product) === 0 ? 'bg-red-50 text-red-800 border border-red-100' : 'bg-teal-50 border border-teal-100 text-teal-800']"
                       class="px-4 py-1 rounded-xl shadow-2xl text-md font-medium">
                     {{
-                      cart.checkProductAvailability(product) === 0 ? 'Out of stock' : cart.checkProductAvailability(product) + ' in stock'
+                      cart.checkProductAvailability(product) === 0 ? t('shop.outOfStock') : t('shop.inStock', { count: cart.checkProductAvailability(product) })
                     }}
                   </span>
               </div>
@@ -105,11 +119,11 @@ const toggleFavorite = () => {
             <div class="mt-10 flex -mx-2 mb-4">
               <div class="px-2">
                 <button
-                    @click="cart.addItem(product)"
+                    @click="addToCart"
                     :disabled="cart.checkProductAvailability(product) === 0"
                     class=" flex items-center justify-center rounded-lg bg-teal-600 px-5 py-2.5 text-lg font-medium text-white hover:bg-teal-700 focus:outline-none focus:ring-4 focus:ring-teal-300 disabled:bg-gray-200"
                 >
-                  <span class="ml-1">Add to cart</span>
+                  <span class="ml-1">{{ t('common.add') }}</span>
                 </button>
               </div>
               <div class="px-2">
@@ -119,7 +133,7 @@ const toggleFavorite = () => {
                 >
                     <span class="ml-1">
                       {{
-                        products.isFavourite(product) ? 'Remove from wishlist' : 'Add to wishlist'
+                        products.isFavourite(product) ? t('shop.removeFromWishlist') : t('shop.addToWishlist')
                       }}
                     </span>
                 </button>
@@ -132,9 +146,9 @@ const toggleFavorite = () => {
             class="grid grid-cols-1 gap-4"
         >
           <div class="mt-20 col-span-2 bg-gray-50 border border-gray-200 rounded-lg shadow pt-5 pb-10 px-10">
-            <h1 class="text-2xl font-semibold text-gray-800">Related products</h1>
+            <h1 class="text-2xl font-semibold text-gray-800">{{ t('shop.relatedProducts') }}</h1>
             <div
-                class="text-center mx-auto mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4"
+                class="text-center mx-auto mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6"
             >
               <RelatedProduct
                   v-for="product in relatedProducts"

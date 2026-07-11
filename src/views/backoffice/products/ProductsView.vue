@@ -1,5 +1,6 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useProductsStore } from '@/stores/products.js'
 import PageTitle from '@/components/layout/base/PageTitle.vue'
 import ProductList from '@/components/ui/backoffice/ProductList.vue'
@@ -9,19 +10,20 @@ import useToast from '@/composables/useToast.js'
 
 const products = useProductsStore()
 const { show } = useToast()
+const { t } = useI18n()
 
-const notification = {
-  title: 'Store is empty',
-  message: 'No products have been added to the store yet. Start by clicking the button below to add your first product and manage it easily from here.',
+const notification = computed(() => ({
+  title: t('shop.storeEmpty'),
+  message: t('products.emptyMessage'),
   button1: {
-    text: 'Start adding a new product',
+    text: t('products.startAdding'),
     route: ''
   },
   button2: {
-    text: 'Import demo content',
+    text: t('products.importDemo'),
     route: 'import-demo'
   }
-}
+}))
 
 const loading = ref(true)
 
@@ -29,7 +31,7 @@ onMounted(() => {
   setTimeout(() => {
     loading.value = false
     if (localStorage.getItem('demoImported') === '1' && products.productsCollection.length > 0) {
-      show('Products imported', 'success')
+      show(t('products.imported'), 'success')
       localStorage.removeItem('demoImported')
     }
   }, 1500)
@@ -38,11 +40,11 @@ onMounted(() => {
 
 <template>
   <div v-if="!loading">
-    <PageTitle title="Products"  parentTitle="Admin"/>
+    <PageTitle :title="t('navigation.products')" :parentTitle="t('navigation.admin')"/>
     <div class="mt-5">
       <RouterLink v-if="products.productsCollection.length > 0" :to="{name: 'new-product'}">
         <button type="button" class="px-3 py-2 text-sm font-medium text-center inline-flex items-center text-white bg-teal-600 rounded-lg hover:bg-teal-700 focus:ring-4 focus:outline-none focus:ring-teal-300">
-          Add new product
+          {{ t('products.addNew') }}
         </button>
       </RouterLink>
       <Notification

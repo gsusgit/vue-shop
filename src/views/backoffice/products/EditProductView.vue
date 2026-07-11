@@ -1,5 +1,6 @@
 <script setup>
 import { ref, reactive, watch, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
 import { FormKit } from '@formkit/vue'
 import useImage from '@/composables/useImage.js'
@@ -21,6 +22,7 @@ const {
 const store = useProductsStore()
 const products = useProductsStore()
 const { show } = useToast()
+const { t } = useI18n()
 const route = useRoute()
 const router = useRouter()
 const fileInputRef = ref(null)
@@ -69,7 +71,7 @@ const submitHandler = async (data) => {
 }
 
 const triggerToast = () => {
-  show('Product updated', 'success')
+  show(t('products.updated'), 'success')
   router.push({ name: 'products' })
 }
 </script>
@@ -80,61 +82,62 @@ const triggerToast = () => {
   </div>
   <div v-else>
     <PageTitle
-        title="Edit Product"
-        parentTitle="Products"/>
+        :title="t('products.editProduct')"
+                :parent-title="t('navigation.products')"
+                parent-route="products" />
     <div
         class="mt-10 p-5 border border-gray-200 rounded-lg bg-white">
       <FormKit
           type="form"
-          submit-label="Update Product"
+          :submit-label="t('products.updateProduct')"
           @submit="submitHandler"
           :value="formData"
       >
         <div
-            class="grid grid-cols-3 gap-4">
+            class="grid gap-6 lg:grid-cols-3">
           <div
-              class="col-span-2">
+              class="lg:col-span-2">
             <FormKit
                 type="text"
-                label="Name"
-                name="name"
-                placeholder="Product name"
-                validation="required"
-                :validation-messages="{ required: 'Name is required' }"
+                :label="t('common.name')"
+                                name="name"
+                                :placeholder="t('products.productName')"
+                                validation="required"
+                                :validation-messages="{ required: t('products.nameRequired') }"
                 v-model.trim="formData.name"
             />
 
             <FormKit
                 type="textarea"
-                label="Description"
-                name="description"
-                placeholder="Product description"
-                validation="required"
-                :validation-messages="{ required: 'Description is required' }"
+                :label="t('common.description')"
+                                name="description"
+                                :placeholder="t('products.productDescription')"
+                                validation="required"
+                                :validation-messages="{ required: t('products.descriptionRequired') }"
                 rows="12"
                 v-model.trim="formData.description"
             />
 
             <div
-                class="grid grid-cols-3 gap-4 mt-4">
+                class="mt-4 grid gap-4 sm:grid-cols-3">
               <FormKit
                   type="select"
-                  label="Category"
-                  name="category"
-                  placeholder="Category"
-                  validation="required"
-                  :validation-messages="{ required: 'Category is required' }"
+                  :label="t('common.category')"
+                                    name="category"
+                                    :placeholder="t('common.selectCategory')"
+                                    validation="required"
+                                    :validation-messages="{ required: t('products.categoryRequired') }"
                   :options="products.categoryOptions"
                   v-model.trim="formData.category"
               />
 
               <FormKit
                   type="number"
-                  label="Price"
-                  name="price"
-                  placeholder="Product price"
-                  validation="required"
-                  :validation-messages="{ required: 'Price is required' }"
+                  :label="t('common.price')"
+                                    name="price"
+                                    :placeholder="t('products.productPrice')"
+                                    validation="required"
+                                    :validation-messages="{ required: t('products.priceRequired') }"
                   min="0"
                   step="0.01"
                   v-model.number="formData.price"
@@ -142,11 +145,11 @@ const triggerToast = () => {
 
               <FormKit
                   type="number"
-                  label="Stock"
-                  name="stock"
-                  placeholder="Product units"
-                  validation="required"
-                  :validation-messages="{ required: 'Stock is required' }"
+                  :label="t('common.stock')"
+                                    name="stock"
+                                    :placeholder="t('products.productUnits')"
+                                    validation="required"
+                                    :validation-messages="{ required: t('products.stockRequired') }"
                   min="0"
                   v-model.number="formData.stock"
               />
@@ -154,35 +157,35 @@ const triggerToast = () => {
           </div>
 
           <div
-              class="col-span-1">
+              class="lg:col-span-1">
             <label
-                class="formkit-label block font-bold text-gray-700 mb-2 text-sm">Image</label>
+                class="formkit-label block font-bold text-gray-700 mb-2 text-sm">{{ t('common.image') }}</label>
             <div
                 v-if="isUploading && !imageUploaded"
-                class="relative w-full aspect-w-1 aspect-h-1 rounded-xl shadow-sm border border-gray-200"
-                style="height: 390px;"
+                class="relative aspect-square w-full rounded-xl border border-gray-200 shadow-sm"
+
                 role="group"
-                aria-label="Uploading">
-              <div
+                :aria-label="t('common.uploading')">
+                              <div
                   class="absolute inset-0 flex items-center justify-center rounded-2xl">
                 <div
                     class="flex flex-col items-center justify-center">
                   <div
                       class="border-gray-300 h-12 w-12 animate-spin rounded-full border-4 border-t-teal-600"></div>
                   <span
-                      class="mt-2 text-gray-500">Loading image...</span>
+                      class="mt-2 text-gray-500">{{ t('common.loadingImage') }}</span>
                 </div>
               </div>
             </div>
 
             <div
                 v-if="!isUploading"
-                class="relative w-full aspect-w-1 aspect-h-1 rounded-xl shadow-sm border border-gray-200 bg-gray-50"
-                style="height: 395px">
+                class="relative aspect-square w-full rounded-xl border border-gray-200 shadow-sm bg-gray-50"
+               >
               <img
                   v-if="imageUploaded"
                   :src="imageUrl"
-                  alt="Product Image"
+                  :alt="t('common.productImage')"
                   class="cursor-pointer object-cover w-full h-full rounded-2xl"
                   @click="handleImageClick"
               />
@@ -199,7 +202,8 @@ const triggerToast = () => {
                   ref="fileInputRef"
                   class="absolute inset-0 opacity-0 cursor-pointer"
                   accept=".jpg,.jpeg,.png,.webp"
-                  @change="onFileChange($event)"
+                                    :aria-label="t('common.productImage')"
+                                    @change="onFileChange($event)"
               />
             </div>
           </div>

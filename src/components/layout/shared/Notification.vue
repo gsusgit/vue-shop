@@ -1,8 +1,10 @@
 <script setup>
 import { useRoute } from 'vue-router'
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 const route = useRoute()
+const { t } = useI18n()
 
 const isAdminRoute = computed(() => route.path.startsWith('/backoffice'))
 
@@ -23,7 +25,7 @@ defineProps({
       <svg class="flex-shrink-0 w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
         <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
       </svg>
-      <span class="sr-only">Info</span>
+      <span class="sr-only">{{ t('common.info') }}</span>
       <h3 class="text-lg font-medium">{{notification.title}}</h3>
     </div>
     <div class="mt-2 mb-4 text-sm">

@@ -1,5 +1,8 @@
 <script setup>
 import { RouterLink } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 defineProps({
   product: {
@@ -16,7 +19,7 @@ defineProps({
       <img
           class="p-8 rounded-t-lg"
           :src="product.image"
-          alt="product image"
+          :alt="t('shop.productImageAlt')"
       />
     </RouterLink>
     <div

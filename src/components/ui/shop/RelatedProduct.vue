@@ -24,9 +24,8 @@ defineProps({
     </RouterLink>
     <div
         class="px-5 pb-5 flex flex-col flex-grow">
-      <a href="#"
-         class="flex-grow">
-        <h5 class="text-sm text-center font-semibold tracking-tight text-gray-900">{{product.name}}</h5>
+      <a href="#" class="flex min-h-10 flex-grow items-center justify-center">
+        <h5 class="text-center text-sm font-semibold tracking-tight text-gray-900">{{ product.name }}</h5>
       </a>
     </div>
   </div>

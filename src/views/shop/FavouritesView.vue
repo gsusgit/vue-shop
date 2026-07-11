@@ -5,8 +5,10 @@ import Notification from '@/components/layout/shared/Notification.vue'
 import { onMounted, ref } from 'vue'
 import Spinner from '@/components/layout/shared/Spinner.vue'
 import { useI18n } from 'vue-i18n'
+import useToast from '@/composables/useToast.js'
 
 const { t } = useI18n()
+const { show } = useToast()
 
 const notification = {
   title: t('shop.wishlistEmptyTitle'),
@@ -28,8 +30,10 @@ onMounted(() => {
 const toggleFavourite = (product) => {
   if (products.favourites.some(fav => fav.id === product.id)) {
     products.removeFromFavourites(product)
+    show(t('shop.removedFromWishlist'), 'success')
   } else {
     products.addToFavourites(product)
+    show(t('shop.addedToWishlist'), 'success')
   }
 }
 </script>
@@ -42,13 +46,13 @@ const toggleFavourite = (product) => {
       <div
           class="mt-5 grid grid-cols-1 gap-4">
         <div class="col-span-2">
-          <div class="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
-            <Product
-                v-for="product in products.favourites"
-                :key="product.id"
-                :product="product"
-                @toggle-favourite="toggleFavourite(product)"
-            />
+          <div class="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:flex xl:flex-wrap xl:justify-center">
+            <div v-for="product in products.favourites" :key="product.id" class="xl:w-[calc((100%-5rem)/6)]">
+              <Product
+                  :product="product"
+                  @toggle-favourite="toggleFavourite(product)"
+              />
+            </div>
           </div>
         </div>
       </div>

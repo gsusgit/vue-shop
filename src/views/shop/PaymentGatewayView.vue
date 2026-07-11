@@ -190,7 +190,7 @@ onMounted(() => {
             <p v-if="paymentError" class="mb-4 mt-6 rounded-lg bg-red-50 p-3 text-sm text-red-700">{{ paymentError }}</p>
             <button
                 type="submit"
-                class="flex w-full items-center justify-center rounded-lg bg-teal-600 px-5 py-3 text-sm font-medium text-white hover:bg-teal-700 focus:outline-none focus:ring-4 focus:ring-teal-300 disabled:bg-gray-300"
+                class="mt-6 flex w-full items-center justify-center rounded-lg bg-teal-600 px-5 py-3 text-sm font-medium text-white hover:bg-teal-700 focus:outline-none focus:ring-4 focus:ring-teal-300 disabled:bg-gray-300"
                 :disabled="cart.processingPayment || coupon.applyingDiscount"
                             >
                               <span v-if="cart.processingPayment">>{{ t('checkout.processing') }}</span>

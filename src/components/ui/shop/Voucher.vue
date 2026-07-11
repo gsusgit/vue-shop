@@ -25,7 +25,6 @@ const { t } = useI18n()
                       type="text"
                       class="block w-full p-4 text-md text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:bg-gray-50 focus:ring-teal-500 focus:border-teal-500"
                       :placeholder="t('cart.enterCode')"
-                      required
                       v-model="voucher.couponInput"
                   />
                   <button

@@ -6,11 +6,13 @@ import { onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import Spinner from '@/components/layout/shared/Spinner.vue'
 import CartSummaryModal from '@/components/ui/shop/CartSummaryModal.vue'
+import useToast from '@/composables/useToast.js'
 
 const products = useProductsStore()
 const { t } = useI18n()
 const loading = ref(true)
 const cartSummaryOpen = ref(false)
+const { show } = useToast()
 
 onMounted(() => {
   setTimeout(() => {
@@ -21,8 +23,10 @@ onMounted(() => {
 const toggleFavourite = (product) => {
   if (products.isFavourite(product)) {
     products.removeFromFavourites(product)
+    show(t('shop.removedFromWishlist'), 'success')
   } else {
     products.addToFavourites(product, product.id)
+    show(t('shop.addedToWishlist'), 'success')
   }
 }
 
@@ -43,16 +47,16 @@ const showCartSummary = () => {
         <div
             v-if="products.filteredProducts.length > 0"
             id="product-results"
-            class="mt-5 mb-5 scroll-mt-20 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6"
+            class="mt-5 mb-5 grid grid-cols-2 gap-4 scroll-mt-20 sm:grid-cols-3 lg:grid-cols-4 xl:flex xl:flex-wrap xl:justify-center"
         >
-          <Product
-              v-for="product in products.filteredProducts"
-              :key="product.id"
-              :product="product"
-              :is-favourite="products.favourites.some(fav => fav.id === product.id)"
-              @toggle-favourite="toggleFavourite(product)"
-              @added-to-cart="showCartSummary"
-          />
+          <div v-for="product in products.filteredProducts" :key="product.id" class="xl:w-[calc((100%-5rem)/6)]">
+            <Product
+                :product="product"
+                :is-favourite="products.favourites.some(fav => fav.id === product.id)"
+                @toggle-favourite="toggleFavourite(product)"
+                @added-to-cart="showCartSummary"
+            />
+          </div>
         </div>
         <div v-else id="product-results" class="scroll-mt-20 py-10 text-center">
           <h1 class="mb-2 text-2xl font-extrabold tracking-tight text-gray-900">{{ t('shop.noProducts') }}</h1>

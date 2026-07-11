@@ -150,12 +150,11 @@ const addToCart = () => {
           <div class="mt-20 col-span-2 bg-gray-50 border border-gray-200 rounded-lg shadow pt-5 pb-10 px-10">
             <h1 class="text-2xl font-semibold text-gray-800">{{ t('shop.relatedProducts') }}</h1>
             <div
-                class="mx-auto mt-5 grid grid-cols-2 gap-4 text-center sm:grid-cols-3 lg:grid-cols-4 xl:flex xl:flex-wrap xl:justify-center"
+                class="mx-auto mt-5 grid grid-cols-2 gap-4 text-center sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6"
             >
               <RelatedProduct
                   v-for="product in relatedProducts"
-                                    :product="product"
-                                    class="xl:w-[calc((100%-5rem)/6)]"
+                                                      :product="product"
               />
             </div>
           </div>

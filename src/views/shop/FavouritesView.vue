@@ -46,13 +46,13 @@ const toggleFavourite = (product) => {
       <div
           class="mt-5 grid grid-cols-1 gap-4">
         <div class="col-span-2">
-          <div class="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:flex xl:flex-wrap xl:justify-center">
-            <div v-for="product in products.favourites" :key="product.id" class="xl:w-[calc((100%-5rem)/6)]">
-              <Product
-                  :product="product"
-                  @toggle-favourite="toggleFavourite(product)"
-              />
-            </div>
+          <div class="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+            <Product
+                v-for="product in products.favourites"
+                :key="product.id"
+                :product="product"
+                @toggle-favourite="toggleFavourite(product)"
+            />
           </div>
         </div>
       </div>

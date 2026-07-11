@@ -26,7 +26,7 @@ const isFullScreen = computed(() => route.meta.fullScreen)
         :class="{'bg-white': !isAdminRoute}"
         class="flex-grow"
     >
-      <div :class="isHome ? 'mb-20 mt-0' : 'my-20'" class="max-w-screen-xl mx-auto p-4">
+      <div :class="isHome ? 'mb-20 mt-12 lg:mt-0' : 'my-20'" class="max-w-screen-xl mx-auto p-4">
         <Toast />
         <RouterView />
       </div>
@@ -34,6 +34,3 @@ const isFullScreen = computed(() => route.meta.fullScreen)
     <Footer />
   </div>
 </template>
-
-
-

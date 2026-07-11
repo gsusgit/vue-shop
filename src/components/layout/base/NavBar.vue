@@ -3,12 +3,12 @@ import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import {
+  ArchiveBoxIcon,
   Bars3Icon,
   ChevronDownIcon,
   GlobeAltIcon,
   HeartIcon,
   MagnifyingGlassIcon,
-  ShieldCheckIcon,
   ShoppingBagIcon,
   XMarkIcon
 } from '@heroicons/vue/24/outline'
@@ -61,7 +61,10 @@ const handleKeydown = event => {
   if (event.key === 'Escape') closeOverlays()
 }
 
-const changeLocale = event => setLocale(event.target.value)
+const changeLocale = event => {
+  setLocale(event.target.value)
+  drawerOpen.value = false
+}
 
 watch(() => route.fullPath, closeOverlays)
 watch(searchOpen, isOpen => {
@@ -137,24 +140,24 @@ onBeforeUnmount(() => {
                 :aria-label="t('navigation.admin')"
                 :title="t('navigation.admin')"
             >
-              <ShieldCheckIcon class="h-5 w-5" />
+              <ArchiveBoxIcon class="h-5 w-5" />
             </RouterLink>
           </template>
 
-          <div class="relative hidden h-10 md:block" :title="t('navigation.language')">
-            <ChevronDownIcon class="pointer-events-none absolute left-1 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
-            <span class="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-xs font-semibold text-gray-700">{{ locale.toUpperCase() }}</span>
-            <GlobeAltIcon class="pointer-events-none absolute right-1 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-700" />
+          <label class="relative hidden h-10 w-24 items-center justify-center gap-1 rounded-lg border border-gray-300 text-gray-700 md:inline-flex" :title="t('navigation.language')">
+            <ChevronDownIcon class="pointer-events-none h-4 w-4 text-gray-500" />
+            <span class="pointer-events-none text-xs font-semibold">{{ locale.toUpperCase() }}</span>
+            <GlobeAltIcon class="pointer-events-none h-4 w-4" />
             <select
                 :value="locale"
-                class="h-10 w-20 cursor-pointer appearance-none rounded-lg border border-gray-300 bg-transparent text-transparent focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-200"
+                class="absolute inset-0 h-full w-full cursor-pointer appearance-none opacity-0 focus:outline-none focus:ring-2 focus:ring-teal-200"
                 :aria-label="t('navigation.language')"
                 @change="changeLocale"
             >
               <option value="en">EN</option>
               <option value="es">ES</option>
             </select>
-          </div>
+          </label>
 
           <button
               type="button"

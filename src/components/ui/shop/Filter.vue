@@ -10,18 +10,28 @@ const isSelected = (categoryValue) => {
   return products.selectedCategory === categoryValue
 }
 
-const selectCategory = (category) => {
-  if (category === '') {
-    products.selectedCategory = 0
-  } else {
-    products.selectedCategory = category
-  }
+const selectCategory = category => {
+  products.selectedCategory = Number(category) || 0
 }
 </script>
 
 <template>
 
-  <div class="flex items-center justify-center flex-wrap">
+  <label class="block sm:hidden">
+    <span class="sr-only">{{ t('common.category') }}</span>
+    <select
+        :value="products.selectedCategory"
+        class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2.5 text-gray-900 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-200"
+        @change="selectCategory($event.target.value)"
+    >
+      <option :value="0">{{ t('shop.allCategories') }}</option>
+      <option v-for="category in products.filterCategories" :key="category.value" :value="category.value">
+        {{ category.label }}
+      </option>
+    </select>
+  </label>
+
+  <div class="hidden flex-wrap items-center justify-center sm:flex">
     <button
         type="button"
         :class="[

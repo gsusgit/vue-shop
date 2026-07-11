@@ -18,19 +18,19 @@ const copyCoupon = () => {
 
 <template>
   <section id="hero" class="-mb-px bg-neutral-900 pb-8 pt-24">
-    <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
-      <div class="mr-auto place-self-center text-center lg:col-span-7 lg:text-left">
-        <h1 class="text-white max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl">
+    <div class="mx-auto grid max-w-screen-xl px-4 py-8 min-[691px]:grid-cols-[minmax(0,1.05fr)_minmax(13rem,0.95fr)] min-[691px]:items-center min-[691px]:gap-6 min-[691px]:py-12 lg:gap-8 lg:py-16">
+      <div class="mx-auto max-w-2xl place-self-center text-center min-[691px]:mx-0 min-[691px]:text-left">
+        <h1 class="mb-4 max-w-2xl text-4xl font-extrabold leading-none tracking-tight text-white min-[691px]:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
           <span class="text-teal-600">{{ t('shop.freshPicksPrimary') }}</span> {{ t('shop.freshPicksSuffix') }}
         </h1>
-        <p class="max-w-2xl mb-6 font-lightlg:mb-8 md:text-lg lg:text-xl text-gray-400">{{ t('shop.heroDescription') }}</p>
+        <p class="mb-6 max-w-2xl text-gray-400 min-[691px]:text-base md:text-lg lg:mb-8 lg:text-xl">{{ t('shop.heroDescription') }}</p>
         <RouterLink :to="{name: 'product', params: {id: '5vm2UbWX8pFziDMuDZzh'}}">
           <a class="bg-white inline-flex items-center justify-center px-5 py-3 text-base font-bold text-center border rounded-3xl text-black border-gray-700 hover:bg-teal-700 hover:text-white focus:ring-gray-800">
             Jordan 1 Chicago Off White
           </a>
         </RouterLink>
-        <div class="mt-10 flex max-w-2xl flex-col items-center gap-4 lg:flex-row lg:items-center">
-          <span class="inline-flex items-center justify-center rounded-lg bg-primary-700 px-5 py-3 text-center text-base font-medium text-white hover:bg-primary-800 focus:ring-4 focus:ring-primary-300">
+        <div class="mt-10 flex max-w-2xl flex-col items-center gap-4 min-[691px]:flex-row min-[691px]:items-center">
+          <span class="inline-flex items-center justify-center rounded-lg bg-primary-700 px-5 py-3 text-center text-base font-medium text-white hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 min-[691px]:text-sm md:text-base">
             {{ t('shop.couponOffer') }}
           </span>
           <span
@@ -41,8 +41,12 @@ const copyCoupon = () => {
           </span>
         </div>
       </div>
-      <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-        <img src="@/assets/images/carousel/jordan1-chicago-off-white.png" :alt="t('shop.productImageAlt')">
+      <div class="hidden min-[691px]:flex min-[691px]:items-center min-[691px]:justify-center">
+        <img
+            src="@/assets/images/carousel/jordan1-chicago-off-white.png"
+            :alt="t('shop.productImageAlt')"
+            class="max-h-64 w-auto object-contain md:max-h-80 lg:max-h-[26rem]"
+        >
       </div>
     </div>
     <div class="custom-shape-divider-bottom-1726786931">

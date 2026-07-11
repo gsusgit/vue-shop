@@ -208,3 +208,11 @@ Ejemplo “checkout”:
 
 - **Ejercicio 10 (Nivel: Alto)**: implementar sistema de autenticación y autorización para el backoffice y añadir al menú de navegación.  
   Comentario: toca conceptos de roles, protección de rutas y manejo de sesión (aunque sea simulado en el front). Practicaremos también el uso de distintos layouts para la parte pública y privada.
+
+- **Ejercicio 11 (Nivel: Libre)**: mejorar la interfaz de la aplicación. Puedes replantear la jerarquía visual, los componentes, los estados vacíos/carga, la experiencia responsive y los detalles de accesibilidad, sin romper los flujos existentes.
+
+  Comentario: es un ejercicio abierto para mostrar creatividad, criterio de producto y cuidado por el detalle. Resulta especialmente útil para valorar el craft de una persona candidata.
+
+- **Ejercicio 12 (Nivel: Medio/Alto)**: actualizar dependencias y resolver vulnerabilidades detectadas por `npm audit`.
+
+  Comentario: revisa cambios incompatibles, actualiza paquetes de forma gradual, valida el build y los flujos principales, y documenta las decisiones de mantenimiento o vulnerabilidades que no puedan resolverse sin una migración mayor.
